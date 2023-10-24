@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,17 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+.constructorWrapper {
+  display: flex;
+  gap: 40px;
+}
+
+/* НЕ МОИ */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
 }

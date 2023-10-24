@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AppHeader } from './components/app-header/AppHeader'
+import {ScWrapper, ScContainer} from './App.styled';
+import { BurgerIngredients } from './components/burger-ingredients/BurgerIngredients';
+import { BurgerConstructor } from './components/burger-constructor/BurgerConstructor';
+import { data } from './utils/burger-api';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   <div>
+      <AppHeader/>
+      <ScWrapper>
+      <h1 className='mb-5'>Соберите бургер</h1>
+      <ScContainer>
+          <BurgerIngredients data={data}/>
+          <BurgerConstructor data={data} />
+      </ScContainer>
+      </ScWrapper>
     </div>
   );
 }
 
 export default App;
+
+
