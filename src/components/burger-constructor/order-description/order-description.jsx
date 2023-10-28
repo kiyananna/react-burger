@@ -5,7 +5,7 @@ import {
   ScBottomTitle,
 } from './order-description.styled';
 
-export const OrderDescription = ({ orderId }) => {
+export const OrderDetails = ({ orderId }) => {
   return (
     <ScDescription>
       <ScTitle className="text text_type_digits-large mb-8">{orderId}</ScTitle>
@@ -19,6 +19,6 @@ export const OrderDescription = ({ orderId }) => {
   );
 };
 
-OrderDescription.propTypes = {
+OrderDetails.propTypes = {
   orderId: PropTypes.string,
 };

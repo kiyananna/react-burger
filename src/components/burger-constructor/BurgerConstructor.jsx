@@ -14,7 +14,7 @@ import {
 import { IngredientCard } from './ingredient-card/ingredient-card';
 import { itemType } from '../../utils/prop-types';
 import { Modal } from '../modal/modal';
-import { OrderDescription } from './order-description/order-description';
+import { OrderDetails } from './order-description/order-description';
 
 export const BurgerConstructor = ({ data }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -71,7 +71,7 @@ export const BurgerConstructor = ({ data }) => {
       </PriceWrapper>
       {isOpen && (
         <Modal handleModalClose={() => setIsOpen(false)}>
-          <OrderDescription orderId={'777'} />
+          <OrderDetails orderId={'777'} />
         </Modal>
       )}
     </ScBurgerConstructorWrapper>
