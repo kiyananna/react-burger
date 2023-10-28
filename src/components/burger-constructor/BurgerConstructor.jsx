@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react';
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -12,12 +13,17 @@ import {
 } from './BurgerConstructor.styled';
 import { IngredientCard } from './ingredient-card/ingredient-card';
 import { itemType } from '../../utils/prop-types';
+import { Modal } from '../modal/modal';
+import { OrderDescription } from './order-description/order-description';
 
 export const BurgerConstructor = ({ data }) => {
-  const firstElement = data.filter((item, index) => index === 0)[0];
-  const totalPrice = data
-    .map((item) => item.price)
-    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  const [isOpen, setIsOpen] = useState(true);
+  const firstElement = data.find((item, index) => index === 0);
+  const totalPrice = useMemo(() => {
+    return data
+      .map((item) => item.price)
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  }, [data]);
   return (
     <ScBurgerConstructorWrapper>
       <ScIngredientItem className="mb-4">
@@ -51,10 +57,23 @@ export const BurgerConstructor = ({ data }) => {
         <span className="mr-10">
           <CurrencyIcon type="primary" />
         </span>
-        <Button htmlType="button" type="primary" size="medium">
+
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          htmlType="button"
+          type="primary"
+          size="medium"
+        >
           Оформить заказ
         </Button>
       </PriceWrapper>
+      {isOpen && (
+        <Modal handleModalClose={() => setIsOpen(false)}>
+          <OrderDescription orderId={'777'} />
+        </Modal>
+      )}
     </ScBurgerConstructorWrapper>
   );
 };
