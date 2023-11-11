@@ -4,8 +4,10 @@ import {
   ScTitle,
   ScBottomTitle,
 } from './order-description.styled';
+import { useSelector } from 'react-redux';
 
-export const OrderDetails = ({ orderId }) => {
+export const OrderDetails = () => {
+  const orderId = useSelector((state) => state.orderDetail.orderID);
   return (
     <ScDescription>
       <ScTitle className="text text_type_digits-large mb-8">{orderId}</ScTitle>

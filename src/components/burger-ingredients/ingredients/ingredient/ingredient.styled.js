@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Card = styled.li`
+  position: relative;
   max-width: 272px;
   list-style: none;
   cursor: pointer;
@@ -21,4 +22,10 @@ export const CardCost = styled.span`
 export const CardTitle = styled.h3`
   text-align: center;
   min-height: 48px;
+`;
+
+export const ScCounter = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
