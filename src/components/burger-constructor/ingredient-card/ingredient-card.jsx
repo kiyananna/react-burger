@@ -15,7 +15,7 @@ export const IngredientCard = ({
 }) => {
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
-    accept: 'item',
+    accept: 'ingredient',
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -47,7 +47,7 @@ export const IngredientCard = ({
   });
 
   const [{}, drag] = useDrag({
-    type: 'item',
+    type: 'ingredient',
     item: () => {
       return { id, index };
     },

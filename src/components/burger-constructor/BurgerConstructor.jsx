@@ -56,18 +56,18 @@ export const BurgerConstructor = () => {
     [dispatch],
   );
 
-  // const totalPrice = useMemo(() => {
-  //   const sum = data
-  //     .map((item) => {
-  //       if (item.data.type === 'bun') {
-  //         return item.data.price * 2;
-  //       }
-  //       return item.data.price;
-  //     })
-  //     .reduce((acc, curr) => acc + curr, 0);
+  const totalPrice = useMemo(() => {
+    const sum = data
+      .map((item) => {
+        if (item.data.type === 'bun') {
+          return item.data.price * 2;
+        }
+        return item.data.price;
+      })
+      .reduce((acc, curr) => acc + curr, 0);
 
-  //   return sum;
-  // }, [data]);
+    return sum;
+  }, [data]);
 
   const [{}, dropRef] = useDrop(() => ({
     accept: 'item',
@@ -164,7 +164,7 @@ export const BurgerConstructor = () => {
       </div>
 
       <PriceWrapper>
-        {/* <p className="mr-2">{totalPrice}</p> */}
+        <p className="mr-2">{totalPrice}</p>
         <span className="mr-10">
           <CurrencyIcon type="primary" />
         </span>

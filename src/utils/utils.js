@@ -1,27 +1,24 @@
+import { API_URL } from '../constants/constants';
+
 export const loadPost = async (url) => {
   const response = await fetch(url);
-  if (!response.ok) {
-    const message = `Ошибка: ${response.status}`;
-    throw new Error(message);
-  }
-
-  const data = await response.json();
-  return data;
+  return checkResponse(response);
 };
 
 export const postOrder = async (body) => {
-  const response = await fetch('https://norma.nomoreparties.space/api/orders', {
+  const response = await fetch(`${API_URL}orders`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       ingredients: body,
     }),
   });
-  if (!response.ok) {
-    const message = `Ошибка: ${response.status}`;
-    throw new Error(message);
-  }
+  return checkResponse(response);
+};
 
-  const data = await response.json();
-  return data;
+export const checkResponse = (response) => {
+  if (!response.ok) {
+    throw new Error(`Ошибка: ${response.status}`);
+  }
+  return response.json();
 };
