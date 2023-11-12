@@ -50,6 +50,7 @@ export const BurgerConstructor = () => {
 
   const moveElement = useCallback(
     (dragIndex, hoverIndex) => {
+      console.log('dragIndex', dragIndex);
       dispatch(moveConstructorElement(dragIndex, hoverIndex));
     },
     [dispatch],
@@ -87,7 +88,7 @@ export const BurgerConstructor = () => {
   };
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   }, [data]);
   return (
     <ScBurgerConstructorWrapper>
