@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ScWrapper, ScTitle, ScList, ScItem } from './ingredient-detail.styled';
 
-export const IngredientDetail = ({ data }) => {
+export const IngredientDetail = () => {
+  const data = useSelector((state) => state.ingredientDetail.ingredientDetail);
+
   return (
     <ScWrapper>
       <img src={data.image_large} alt="" />

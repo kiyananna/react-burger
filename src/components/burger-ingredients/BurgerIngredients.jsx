@@ -5,7 +5,7 @@ import { Ingredients } from './ingredients/ingredients';
 import PropTypes from 'prop-types';
 import { itemType } from '../../utils/prop-types';
 
-export const BurgerIngredients = ({ data }) => {
+export const BurgerIngredients = () => {
   const [current, setCurrent] = useState('bun');
   const bunRef = useRef(null);
   const sauceRef = useRef(null);
@@ -39,9 +39,9 @@ export const BurgerIngredients = ({ data }) => {
         </Tab>
       </ScTabs>
       <ScIngredients className="custom-scroll">
-        <Ingredients type={'bun'} ref={bunRef} data={data} title="Булки" />
-        <Ingredients type={'sauce'} ref={sauceRef} data={data} title="Соусы" />
-        <Ingredients type={'main'} ref={mainRef} data={data} title="Начинки" />
+        <Ingredients type={'bun'} ref={bunRef} title="Булки" />
+        <Ingredients type={'sauce'} ref={sauceRef} title="Соусы" />
+        <Ingredients type={'main'} ref={mainRef} title="Начинки" />
       </ScIngredients>
     </section>
   );
