@@ -6,20 +6,37 @@ import PropTypes from 'prop-types';
 import { itemType } from '../../utils/prop-types';
 
 export const BurgerIngredients = ({ data }) => {
+  const [current, setCurrent] = useState('bun');
   const bunRef = useRef(null);
   const sauceRef = useRef(null);
   const mainRef = useRef(null);
 
-  const handleTabChange = (ref) => {
+  const handleTabChange = (ref, cur) => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
+    setCurrent(cur);
   };
 
   return (
     <section>
       <ScTabs>
-        <Tab onClick={() => handleTabChange(bunRef)}>Булки</Tab>
-        <Tab onClick={() => handleTabChange(sauceRef)}>Соусы</Tab>
-        <Tab onClick={() => handleTabChange(mainRef)}>Начинки</Tab>
+        <Tab
+          active={current === 'bun'}
+          onClick={() => handleTabChange(bunRef, 'bun')}
+        >
+          Булки
+        </Tab>
+        <Tab
+          active={current === 'sauce'}
+          onClick={() => handleTabChange(sauceRef, 'sauce')}
+        >
+          Соусы
+        </Tab>
+        <Tab
+          active={current === 'main'}
+          onClick={() => handleTabChange(mainRef, 'main')}
+        >
+          Начинки
+        </Tab>
       </ScTabs>
       <ScIngredients className="custom-scroll">
         <Ingredients type={'bun'} ref={bunRef} data={data} title="Булки" />

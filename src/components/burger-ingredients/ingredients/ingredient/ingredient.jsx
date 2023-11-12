@@ -53,23 +53,23 @@ export const Ingredient = ({ data }) => {
   const constructorList = useSelector(
     (state) => state.ingredientsConstructor.constructorList,
   );
-  // const count = useMemo(() => {
-  //   return constructorList.reduce((count, item) => {
-  //     if (item.data._id === data._id) {
-  //       return item.type === 'bun' ? count + 2 : count + 1;
-  //     }
-  //     return count;
-  //   }, 0);
-  // }, [constructorList, data]);
+  const count = useMemo(() => {
+    return constructorList.reduce((count, item) => {
+      if (item.data._id === data._id) {
+        return item.type === 'bun' ? count + 2 : count + 1;
+      }
+      return count;
+    }, 0);
+  }, [constructorList, data]);
 
   return (
     <>
       <Card onClick={handleModalOpen}>
-        {/* {count > 0 && (
+        {count > 0 && (
           <ScCounter>
             <Counter id={data._id} count={count} size="default" />
           </ScCounter>
-        )} */}
+        )}
         <CardImage
           ref={dragRef}
           style={{ cursor: didDrop ? 'grab' : 'default' }}
