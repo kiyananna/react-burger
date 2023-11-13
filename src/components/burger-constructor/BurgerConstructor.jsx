@@ -4,7 +4,6 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import {
   ScBurgerConstructorWrapper,
   ScIngredientItem,
@@ -12,8 +11,7 @@ import {
   PriceWrapper,
   ScIngredient,
 } from './BurgerConstructor.styled';
-import { IngredientCard } from './ingredient-card/ingredient-card';
-import { itemType } from '../../utils/prop-types';
+import { IngredientCard } from './ingredient-card/IngredientCard';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from './order-description/order-description';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,10 +23,7 @@ import {
   moveConstructorElement,
 } from '../../services/constructor-ingredients/actions';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  getOrderDetail,
-  getOrderRequest,
-} from '../../services/order-detail/actions';
+import { getOrderRequest } from '../../services/order-detail/actions';
 import { postOrder } from '../../utils/utils';
 import { nanoid } from 'nanoid';
 
@@ -43,14 +38,11 @@ export const BurgerConstructor = () => {
     setIsOpen(true);
     const orderIds = data.map((item) => item.data._id);
     dispatch(getOrderRequest());
-    postOrder(orderIds).then((data) => {
-      dispatch(getOrderDetail(data.order.number));
-    });
+    dispatch(postOrder(orderIds));
   };
 
   const moveElement = useCallback(
     (dragIndex, hoverIndex) => {
-      console.log('dragIndex', dragIndex);
       dispatch(moveConstructorElement(dragIndex, hoverIndex));
     },
     [dispatch],

@@ -2,7 +2,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ScIngredientItem } from './ingredient-card.styled';
+import { ScIngredientItem } from './IngredientCard.styled';
 import { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 
@@ -58,18 +58,16 @@ export const IngredientCard = ({
   // const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <>
-      <ScIngredientItem data-handler-id={handlerId} ref={ref}>
-        <div>
-          <DragIcon type="primary" />
-        </div>
-        <ConstructorElement
-          text={data.name}
-          price={data.price}
-          thumbnail={data.image_mobile}
-          handleClose={deleteItem}
-        />
-      </ScIngredientItem>
-    </>
+    <ScIngredientItem data-handler-id={handlerId} ref={ref}>
+      <div>
+        <DragIcon type="primary" />
+      </div>
+      <ConstructorElement
+        text={data.name}
+        price={data.price}
+        thumbnail={data.image_mobile}
+        handleClose={deleteItem}
+      />
+    </ScIngredientItem>
   );
 };

@@ -10,6 +10,21 @@ export const BurgerIngredients = () => {
   const bunRef = useRef(null);
   const sauceRef = useRef(null);
   const mainRef = useRef(null);
+  const menuRef = useRef();
+
+  useEffect(() => {
+    menuRef.current.addEventListener('scroll', () => {
+      if (menuRef.current.scrollTop < 250) {
+        setCurrent('bun');
+      }
+      if (menuRef.current.scrollTop > 250 && menuRef.current.scrollTop < 800) {
+        setCurrent('sauce');
+      }
+      if (menuRef.current.scrollTop > 800) {
+        setCurrent('main');
+      }
+    });
+  }, []);
 
   const handleTabChange = (ref, cur) => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -38,7 +53,7 @@ export const BurgerIngredients = () => {
           Начинки
         </Tab>
       </ScTabs>
-      <ScIngredients className="custom-scroll">
+      <ScIngredients className="custom-scroll" ref={menuRef}>
         <Ingredients type={'bun'} ref={bunRef} title="Булки" />
         <Ingredients type={'sauce'} ref={sauceRef} title="Соусы" />
         <Ingredients type={'main'} ref={mainRef} title="Начинки" />

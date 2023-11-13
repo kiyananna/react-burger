@@ -19,6 +19,7 @@ import {
   clearIngredientDescription,
 } from '../../../../services/ingredient-detail/actions';
 import { useSelector, useDispatch } from 'react-redux';
+import { itemType } from '../../../../utils/prop-types';
 
 export const Ingredient = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +75,7 @@ export const Ingredient = ({ data }) => {
           ref={dragRef}
           style={{ cursor: didDrop ? 'grab' : 'default' }}
           src={data.image}
-          alt=""
+          alt="ингредиент"
         />
         <CardCost>
           <CurrencyIcon type="primary" />
@@ -85,11 +86,15 @@ export const Ingredient = ({ data }) => {
       {isOpen && (
         <Modal
           handleModalClose={handleModalClose}
-          modalTitle="Детали Ингридиента"
+          modalTitle="Детали Ингредиента"
         >
           <IngredientDetail data={data} />
         </Modal>
       )}
     </>
   );
+};
+
+Ingredient.propTypes = {
+  data: itemType.isRequired,
 };

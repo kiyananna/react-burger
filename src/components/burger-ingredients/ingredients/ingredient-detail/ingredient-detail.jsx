@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { ScWrapper, ScTitle, ScList, ScItem } from './ingredient-detail.styled';
 
 export const IngredientDetail = () => {
@@ -7,7 +6,7 @@ export const IngredientDetail = () => {
 
   return (
     <ScWrapper>
-      <img src={data.image_large} alt="" />
+      <img src={data.image_large} alt="ингредиент" />
       <ScTitle>{data.name}</ScTitle>
       <ScList>
         <ScItem>
@@ -37,14 +36,4 @@ export const IngredientDetail = () => {
       </ScList>
     </ScWrapper>
   );
-};
-
-IngredientDetail.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string,
-    calories: PropTypes.number,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
-  }).isRequired,
 };
