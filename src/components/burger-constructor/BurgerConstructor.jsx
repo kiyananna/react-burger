@@ -23,9 +23,11 @@ import {
   moveConstructorElement,
 } from '../../services/constructor-ingredients/actions';
 import { v4 as uuidv4 } from 'uuid';
-import { getOrderRequest } from '../../services/order-detail/actions';
-import { postOrder } from '../../utils/utils';
+// import { getOrderRequest } from '../../services/order-detail/actions';
+// import { postOrder } from '../../utils/utils';
 import { nanoid } from 'nanoid';
+
+import { sendOrder } from '../../services/order-detail/actions';
 
 export const BurgerConstructor = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +39,8 @@ export const BurgerConstructor = () => {
   const handleOpen = () => {
     setIsOpen(true);
     const orderIds = data.map((item) => item.data._id);
-    dispatch(getOrderRequest());
-    dispatch(postOrder(orderIds));
+    // dispatch(getOrderRequest());
+    dispatch(sendOrder(orderIds));
   };
 
   const moveElement = useCallback(

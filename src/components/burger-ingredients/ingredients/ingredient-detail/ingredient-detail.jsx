@@ -6,7 +6,7 @@ export const IngredientDetail = () => {
 
   return (
     <ScWrapper>
-      <img src={data.image_large} alt="ингредиент" />
+      <img src={data.image_large} alt="Картинка ингредиента" />
       <ScTitle>{data.name}</ScTitle>
       <ScList>
         <ScItem>

@@ -75,7 +75,7 @@ export const Ingredient = ({ data }) => {
           ref={dragRef}
           style={{ cursor: didDrop ? 'grab' : 'default' }}
           src={data.image}
-          alt="ингредиент"
+          alt="Картинка ингредиента"
         />
         <CardCost>
           <CurrencyIcon type="primary" />

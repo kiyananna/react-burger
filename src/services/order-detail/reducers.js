@@ -19,7 +19,7 @@ export const orderReducer = (state = initialState, action) => {
     case GET_ORDER_FAILED: {
       return {
         ...state,
-        orderID: '',
+        orderID: 'fgfg',
         errorText: action.element,
         isLoading: false,
       };
