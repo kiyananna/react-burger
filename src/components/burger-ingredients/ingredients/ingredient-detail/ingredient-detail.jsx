@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { ScWrapper, ScTitle, ScList, ScItem } from './ingredient-detail.styled';
 
-export const IngredientDetail = () => {
-  const data = useSelector((state) => state.ingredientDetail.ingredientDetail);
+export const IngredientDetail = ({ data }) => {
+  // const data = useSelector((state) => state.ingredientDetail.ingredientDetail);
 
   return (
     <ScWrapper>

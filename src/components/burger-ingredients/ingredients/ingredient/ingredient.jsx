@@ -20,6 +20,8 @@ import {
 } from '../../../../services/ingredient-detail/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { itemType } from '../../../../utils/prop-types';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export const Ingredient = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +29,8 @@ export const Ingredient = ({ data }) => {
     setIsOpen(false);
     dispatch(clearIngredientDescription());
   };
+
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -65,24 +69,31 @@ export const Ingredient = ({ data }) => {
 
   return (
     <>
-      <Card onClick={handleModalOpen}>
-        {count > 0 && (
-          <ScCounter>
-            <Counter id={data._id} count={count} size="default" />
-          </ScCounter>
-        )}
-        <CardImage
-          ref={dragRef}
-          style={{ cursor: didDrop ? 'grab' : 'default' }}
-          src={data.image}
-          alt="Картинка ингредиента"
-        />
-        <CardCost>
-          <CurrencyIcon type="primary" />
-          {data.price}
-        </CardCost>
-        <CardTitle>{data.name}</CardTitle>
-      </Card>
+      <Link
+        to={`ingredients/${data._id}`}
+        state={{ backgroundLocation: location }}
+        className="card-link"
+      >
+        <Card onClick={handleModalOpen}>
+          {count > 0 && (
+            <ScCounter>
+              <Counter id={data._id} count={count} size="default" />
+            </ScCounter>
+          )}
+          <CardImage
+            ref={dragRef}
+            style={{ cursor: didDrop ? 'grab' : 'default' }}
+            src={data.image}
+            alt="Картинка ингредиента"
+          />
+
+          <CardCost>
+            <CurrencyIcon type="primary" />
+            {data.price}
+          </CardCost>
+          <CardTitle>{data.name}</CardTitle>
+        </Card>
+      </Link>
       {isOpen && (
         <Modal
           handleModalClose={handleModalClose}

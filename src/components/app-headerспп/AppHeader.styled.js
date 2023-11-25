@@ -14,10 +14,9 @@ export const Header = styled.header`
   justify-content: space-between;
   max-width: 1280px;
   margin: 0 auto;
-
-  a {
-    text-decoration: none;
-  }
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 40px;
 `;
 
 export const MenuLink = styled.a`
@@ -61,9 +60,4 @@ export const AppHeaderLink = styled.div`
 
 export const AppHeaderIcon = styled.div`
   display: flex;
-`;
-
-export const AppHeaderMenu = styled.nav`
-  display: flex;
-  ${'' /* flex-basis: 35%; */}
 `;
