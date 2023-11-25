@@ -8,7 +8,7 @@ import {
   ScNavSidebar,
   ScNavSidebarLink,
   ScNavSidebarBtn,
-} from './profile-page.styled';
+} from './ProfilePage.styled';
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();

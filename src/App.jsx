@@ -1,23 +1,23 @@
-import { AppHeader } from './components/app-header/AppHeader';
+import { AppHeader } from './components/app-headerспп/AppHeader';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from './services/ingredients/actions';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { LoginPage } from './pages/login-page/login-page';
-import { ForgotPasswordPage } from './pages/forgot-password-page/forgot-password-page';
-import { ResetPasswordPage } from './pages/reset-password-page/reset-password-page';
+import { LoginPage } from './pages/login-page/LoginPage';
+import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordPage';
+import { ResetPasswordPage } from './pages/reset-password-page/ResetPasswordPage';
 import { OrderItems } from './pages/order-items/order-items';
 import { Orders } from './pages/profile-page/orders/orders';
-import { BurgerConstructorPage } from './pages/burger-constructor-page/burger-constructor-page';
-import { ProfileSettings } from './pages/profile-page/profile-settings/profile-settings';
-import { RegisterPage } from './pages/register-page/register-page';
-import { ProfilePage } from './pages/profile-page/profile-page';
-import { ProtectedRoute } from './components/protected-route/protected-route';
+import { BurgerConstructorPage } from './pages/burger-constructor-page/BurgerConstructorPage';
+import { ProfileSettings } from './pages/profile-page/profile-settings/ProfileSettings';
+import { RegisterPage } from './pages/register-page/RegisterPage';
+import { ProfilePage } from './pages/profile-page/ProfilePage';
+import { ProtectedRoute } from './components/protected-route/ProtectedRoute';
 import { getCookie } from './utils/utils';
 import { Wrapper } from './components/layout/wrapper';
-import { IngredientPage } from './pages/ingredient-page/ingredient-page';
+import { IngredientPage } from './pages/ingredient-page/IngredientPage';
 import { NotFoundPage } from './pages/404-page/404-page';
 
 function App() {

@@ -7,7 +7,7 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ScButtonWrapper } from './profile-settings.styled';
+import { ScButtonWrapper } from './ProfileSettings.styled';
 
 export const ProfileSettings = () => {
   const dispatch = useDispatch();
