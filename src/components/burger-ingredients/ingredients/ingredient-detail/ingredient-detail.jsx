@@ -1,10 +1,12 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { ScWrapper, ScTitle, ScList, ScItem } from './ingredient-detail.styled';
 
-export const IngredientDetail = ({ data }) => {
+export const IngredientDetail = () => {
+  const data = useSelector((state) => state.ingredientDetail.ingredientDetail);
+
   return (
     <ScWrapper>
-      <img src={data.image_large} alt="" />
+      <img src={data.image_large} alt="Картинка ингредиента" />
       <ScTitle>{data.name}</ScTitle>
       <ScList>
         <ScItem>
@@ -34,14 +36,4 @@ export const IngredientDetail = ({ data }) => {
       </ScList>
     </ScWrapper>
   );
-};
-
-IngredientDetail.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string,
-    calories: PropTypes.number,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
-  }).isRequired,
 };

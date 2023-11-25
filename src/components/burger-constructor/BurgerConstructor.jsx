@@ -1,56 +1,161 @@
-import { useState, useMemo } from 'react';
+import { useCallback, useState, useMemo, useEffect } from 'react';
 import {
   ConstructorElement,
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import {
   ScBurgerConstructorWrapper,
   ScIngredientItem,
   ScIngredients,
   PriceWrapper,
+  ScIngredient,
 } from './BurgerConstructor.styled';
-import { IngredientCard } from './ingredient-card/ingredient-card';
-import { itemType } from '../../utils/prop-types';
+import { IngredientCard } from './ingredient-card/IngredientCard';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from './order-description/order-description';
+import { useSelector, useDispatch } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import {
+  getConstructorElement,
+  deleteConstructorElement,
+  getBun,
+  moveConstructorElement,
+} from '../../services/constructor-ingredients/actions';
+import { v4 as uuidv4 } from 'uuid';
+// import { getOrderRequest } from '../../services/order-detail/actions';
+// import { postOrder } from '../../utils/utils';
+import { nanoid } from 'nanoid';
 
-export const BurgerConstructor = ({ data }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const firstElement = data.find((item, index) => index === 0);
+import { sendOrder } from '../../services/order-detail/actions';
+
+export const BurgerConstructor = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const data = useSelector(
+    (state) => state.ingredientsConstructor.constructorList,
+  );
+  const dispatch = useDispatch();
+
+  const handleOpen = () => {
+    setIsOpen(true);
+    const orderIds = data.map((item) => item.data._id);
+    // dispatch(getOrderRequest());
+    dispatch(sendOrder(orderIds));
+  };
+
+  const moveElement = useCallback(
+    (dragIndex, hoverIndex) => {
+      dispatch(moveConstructorElement(dragIndex, hoverIndex));
+    },
+    [dispatch],
+  );
+
   const totalPrice = useMemo(() => {
-    return data
-      .map((item) => item.price)
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    const sum = data
+      .map((item) => {
+        if (item.data.type === 'bun') {
+          return item.data.price * 2;
+        }
+        return item.data.price;
+      })
+      .reduce((acc, curr) => acc + curr, 0);
+
+    return sum;
+  }, [data]);
+
+  const [{}, dropRef] = useDrop(() => ({
+    accept: 'item',
+    drop: (item) => addItem(item),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  }));
+
+  const addItem = (element) => {
+    element = { ...element, id: nanoid() };
+    dispatch(getConstructorElement(element));
+    dispatch(getBun(element));
+  };
+  const deleteItem = (element) => {
+    dispatch(deleteConstructorElement(element));
+  };
+
+  useEffect(() => {
+    // console.log(data);
   }, [data]);
   return (
     <ScBurgerConstructorWrapper>
-      <ScIngredientItem className="mb-4">
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text={`${data[0]?.name} (верх)`}
-          price={firstElement?.price}
-          thumbnail={firstElement?.image_mobile}
-        />
-      </ScIngredientItem>
+      <div ref={dropRef}>
+        <ScIngredientItem className="mb-4">
+          {data.length === 0 ? (
+            <div className="EmptyIngredient">
+              <ConstructorElement type="top" text="Булка" />
+            </div>
+          ) : (
+            data.map((element, index) => {
+              return (
+                element.type === 'bun' && (
+                  <ConstructorElement
+                    key={index}
+                    type="top"
+                    isLocked={true}
+                    text={`${element.data.name} (верх)`}
+                    price={element.data.price}
+                    thumbnail={element.data.image_mobile}
+                  />
+                )
+              );
+            })
+          )}
+        </ScIngredientItem>
 
-      <ScIngredients className="custom-scroll">
-        {data.map((item) => (
-          <IngredientCard key={item._id} data={item} />
-        ))}
-      </ScIngredients>
+        <ScIngredients className="custom-scroll">
+          {data.length === 0 ? (
+            <ScIngredient>
+              <div className="EmptyIngredient">
+                <ConstructorElement text="Начинка" />
+              </div>
+            </ScIngredient>
+          ) : (
+            data
+              .filter((item) => item.type !== 'bun')
+              .map((item, index) => (
+                <IngredientCard
+                  index={index}
+                  id={item.id}
+                  key={item.id}
+                  data={item.data}
+                  moveElement={moveElement}
+                  deleteItem={() => deleteItem(item)}
+                />
+              ))
+          )}
+        </ScIngredients>
 
-      <ScIngredientItem className="mt-4">
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text={`${data[0]?.name} (низ)`}
-          price={firstElement?.price}
-          thumbnail={firstElement?.image_mobile}
-        />
-      </ScIngredientItem>
+        <ScIngredientItem className="mt-4">
+          {data.length === 0 ? (
+            <div className="EmptyIngredient">
+              <ConstructorElement type="bottom" text="Булка" />
+            </div>
+          ) : (
+            data.map((element, index) => {
+              return (
+                element.type === 'bun' && (
+                  <ConstructorElement
+                    key={index}
+                    type="bottom"
+                    isLocked={true}
+                    text={`${element.data.name} (низ)`}
+                    price={element.data.price}
+                    thumbnail={element.data.image_mobile}
+                  />
+                )
+              );
+            })
+          )}
+        </ScIngredientItem>
+      </div>
 
       <PriceWrapper>
         <p className="mr-2">{totalPrice}</p>
@@ -59,9 +164,7 @@ export const BurgerConstructor = ({ data }) => {
         </span>
 
         <Button
-          onClick={() => {
-            setIsOpen(true);
-          }}
+          onClick={handleOpen}
           htmlType="button"
           type="primary"
           size="medium"
@@ -71,13 +174,13 @@ export const BurgerConstructor = ({ data }) => {
       </PriceWrapper>
       {isOpen && (
         <Modal handleModalClose={() => setIsOpen(false)}>
-          <OrderDetails orderId={'777'} />
+          <OrderDetails />
         </Modal>
       )}
     </ScBurgerConstructorWrapper>
   );
 };
 
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(itemType.isRequired).isRequired,
-};
+// BurgerConstructor.propTypes = {
+//   data: PropTypes.arrayOf(itemType.isRequired).isRequired,
+// };
