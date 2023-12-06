@@ -1,15 +1,33 @@
-import { AppHeader } from './components/app-header/AppHeader';
-import { ScWrapper, ScContainer } from './App.styled';
+import { AppHeader } from './components/app-headerспп/AppHeader';
 import React, { useEffect } from 'react';
-import { BurgerIngredients } from './components/burger-ingredients/BurgerIngredients';
-import { BurgerConstructor } from './components/burger-constructor/BurgerConstructor';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from './services/ingredients/actions';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { LoginPage } from './pages/login-page/LoginPage';
+import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordPage';
+import { ResetPasswordPage } from './pages/reset-password-page/ResetPasswordPage';
+import { OrderItems } from './pages/order-items/order-items';
+import { Orders } from './pages/profile-page/orders/orders';
+import { BurgerConstructorPage } from './pages/burger-constructor-page/BurgerConstructorPage';
+import { ProfileSettings } from './pages/profile-page/profile-settings/ProfileSettings';
+import { RegisterPage } from './pages/register-page/RegisterPage';
+import { ProfilePage } from './pages/profile-page/ProfilePage';
+import { ProtectedRoute } from './components/protected-route/ProtectedRoute';
+import { getCookie } from './utils/utils';
+import { Wrapper } from './components/layout/wrapper';
+import { IngredientPage } from './pages/ingredient-page/IngredientPage';
+import { NotFoundPage } from './pages/404-page/404-page';
 
 function App() {
   const dispatch = useDispatch();
+  const isAuthorized = getCookie('accessToken') ? true : false;
+  const location = useLocation();
+  const forgotPasswordState = useSelector(
+    (state) => state.recoverPassword.emailRecoverSuccess,
+  );
+  const state = location.state;
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -19,13 +37,60 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <div>
         <AppHeader />
-        <ScWrapper>
-          <h1 className="mb-5">Соберите бургер</h1>
-          <ScContainer>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </ScContainer>
-        </ScWrapper>
+        <Wrapper>
+          <Routes location={state?.backgroundLocation || location}>
+            <Route path="/" element={<BurgerConstructorPage />} />
+            <Route
+              path="/login"
+              element={
+                <ProtectedRoute isAuthorized={!isAuthorized} link={'profile'}>
+                  <LoginPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <ProtectedRoute isAuthorized={!isAuthorized} link={'profile'}>
+                  <RegisterPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/forgot-password"
+              element={
+                <ProtectedRoute isAuthorized={!isAuthorized} link={'profile'}>
+                  <ForgotPasswordPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <ProtectedRoute
+                  isAuthorized={forgotPasswordState}
+                  link={'forgot-password'}
+                >
+                  <ResetPasswordPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/ingredients/:id" element={<IngredientPage />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute isAuthorized={isAuthorized} link={'login'}>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="/profile" element={<ProfileSettings />} />
+              <Route path="/profile/orders" element={<Orders />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/order-list" element={<OrderItems />} />
+          </Routes>
+        </Wrapper>
       </div>
     </DndProvider>
   );

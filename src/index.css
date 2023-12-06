@@ -31,3 +31,29 @@ body {
   justify-content: center;
   padding-top: 12px;
 }
+
+.PageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 140px 0 0 0;
+  position: relative;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.constructor-wrapper {
+  display: flex;
+  gap: 40px;
+}
+
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
