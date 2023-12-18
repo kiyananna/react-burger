@@ -18,7 +18,7 @@ export const postOrder = async (url: string, body: any) => {
   return checkResponse(response);
 };
 
-export const checkResponse = (response: any) => {
+export const checkResponse = (response: Response) => {
   if (!response.ok) {
     throw new Error(`Ошибка: ${response.status}`);
   }

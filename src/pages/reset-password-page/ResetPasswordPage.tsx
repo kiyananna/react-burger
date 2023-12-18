@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FC, FormEvent  } from 'react';
+import { useState, useRef, useEffect, FC, ChangeEvent,  FormEvent  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Input,
@@ -41,7 +41,7 @@ export const ResetPasswordPage: FC = () => {
         <Input
           type={isPassType ? 'password' : 'text'}
           placeholder={'Введите новый пароль'}
-          onChange={(e) => setPassValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setPassValue(e.target.value)}
           icon={isPassType ? 'ShowIcon' : 'HideIcon'}
           value={passValue}
           name={'password'}
@@ -55,7 +55,7 @@ export const ResetPasswordPage: FC = () => {
         <Input
           type={'text'}
           placeholder={'Введите код из письма'}
-          onChange={(e) => setCodeValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setCodeValue(e.target.value)}
           value={codeValue}
           name={'code'}
           error={false}

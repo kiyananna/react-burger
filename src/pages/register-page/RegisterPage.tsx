@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FC, FormEvent } from 'react';
+import { useState, useRef, useEffect, ChangeEvent, FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -52,7 +52,7 @@ export const RegisterPage: FC = () => {
         <Input
           type={'text'}
           placeholder={'Имя'}
-          onChange={(e) => setNameValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setNameValue(e.target.value)}
           value={nameValue}
           name={'name'}
           error={false}
@@ -64,7 +64,7 @@ export const RegisterPage: FC = () => {
         <Input
           type={'email'}
           placeholder={'E-mail'}
-          onChange={(e) => setEmailValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}
           value={emailValue}
           name={'name'}
           error={false}
@@ -76,7 +76,7 @@ export const RegisterPage: FC = () => {
         <Input
           type={isPassType ? 'password' : 'text'}
           placeholder={'Пароль'}
-          onChange={(e) => setPassValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setPassValue(e.target.value)}
           icon={isPassType ? 'ShowIcon' : 'HideIcon'}
           value={passValue}
           name={'name'}

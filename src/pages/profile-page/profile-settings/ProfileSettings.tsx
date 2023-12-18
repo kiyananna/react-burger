@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FC, FormEvent, RefObject, Dispatch, SetStateAction } from 'react';
+import { useState, useRef, useEffect, FC, ChangeEvent, FormEvent, RefObject, Dispatch, SetStateAction } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from '../../../services/user/selectors';
 import { getCookie } from '../../../utils/utils';
@@ -64,7 +64,7 @@ export const ProfileSettings: FC = () => {
         <Input
           type={'text'}
           placeholder={'Имя'}
-          onChange={(e) =>
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
             inputHandler(e.target.value, nameValue, setNameValue)
           }
           onIconClick={() => {
@@ -82,7 +82,7 @@ export const ProfileSettings: FC = () => {
         <Input
           type={'email'}
           placeholder={'E-mail'}
-          onChange={(e) =>
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
             inputHandler(e.target.value, emailValue, setEmailValue)
           }
           onIconClick={() => {
@@ -100,7 +100,7 @@ export const ProfileSettings: FC = () => {
         <Input
           type={'password'}
           placeholder={'Пароль'}
-          onChange={(e) =>
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
             inputHandler(e.target.value, passValue, setPassValue)
           }
           onIconClick={() => {

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FC, FormEvent } from 'react';
+import { useState, useRef, useEffect, FC, ChangeEvent, FormEvent } from 'react';
 import {
   Input,
   Button,
@@ -42,7 +42,7 @@ export const LoginPage: FC  = () => {
         <Input
           type={'email'}
           placeholder={'E-mail'}
-          onChange={(e) => setEmailValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}
           value={emailValue}
           name={'name'}
           error={false}
@@ -54,7 +54,7 @@ export const LoginPage: FC  = () => {
         <Input
           type={isPassType ? 'password' : 'text'}
           placeholder={'Пароль'}
-          onChange={(e) => setPassValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setPassValue(e.target.value)}
           icon={isPassType ? 'ShowIcon' : 'HideIcon'}
           value={passValue}
           name={'name'}

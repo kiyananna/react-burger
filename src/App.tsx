@@ -1,4 +1,4 @@
-import { AppHeader } from './components/app-headerспп/AppHeader';
+import { AppHeader } from './components/app-header/AppHeader';
 import React, { useEffect , FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from './services/ingredients/actions';

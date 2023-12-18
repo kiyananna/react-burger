@@ -1,4 +1,4 @@
-import { useState, useRef,FC, useEffect, FormEvent } from 'react';
+import { useState, useRef,FC, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link  } from 'react-router-dom';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -39,7 +39,7 @@ export const ForgotPasswordPage: FC = () => {
         <Input
           type={'email'}
           placeholder={'Укажите e-mail'}
-          onChange={e => setEmailValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}
           value={emailValue}
           name={'name'}
           error={false}

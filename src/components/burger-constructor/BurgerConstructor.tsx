@@ -28,6 +28,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { nanoid } from 'nanoid';
 import { TItem } from '../../utils/types'
 import { sendOrder } from '../../services/order-detail/actions';
+import { useNavigate } from 'react-router-dom';
+import { getUserAuth } from '../../services/user/selectors';
 
 
 type ConstructorProps = {
@@ -44,8 +46,18 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
   );
   
   const dispatch: any = useDispatch();
+  // const isUserAuth = !!useAppSelector(getUserAuth);
+  const navigate = useNavigate();
+  const userAuth = useSelector((state) => getUserAuth(state));
+
+  
 
   const handleOpen = () => {
+  
+    if (!userAuth) {
+      navigate('/login');
+    }
+
     setIsOpen(true);
     const orderIds = data.map((item: any) => item.data._id);
     // dispatch(getOrderRequest());
