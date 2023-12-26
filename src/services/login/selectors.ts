@@ -1,0 +1,1 @@
+export const getLoginData = (state: any) => state.login.loginData?.success;
