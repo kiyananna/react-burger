@@ -7,12 +7,15 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../services/login/actions';
+import { useAppSelector, useAppDispatch  } from '../../hooks/index';
+import { RootState } from '../../services/store';
+
 
 export const LoginPage: FC  = () => {
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { loginData, errorText, isLoading } :any = useSelector(
-    (state:any) => state.login,
+  const { loginData } :any = useAppSelector(
+    (state: RootState) => state.login,
   );
   const [isPassType, setIsPassType] = useState(true);
   const [emailValue, setEmailValue] = useState('');
@@ -27,7 +30,7 @@ export const LoginPage: FC  = () => {
     
     dispatch(login(inputEmailRef?.current?.value, inputPassRef?.current?.value));
   };
-  const { logOutRequest } : any = useSelector((state: any ) => state.logout);
+  const { logOutRequest } = useAppSelector((state: RootState ) => state.logout);
 
   useEffect(() => {
     if (loginData && !logOutRequest) {

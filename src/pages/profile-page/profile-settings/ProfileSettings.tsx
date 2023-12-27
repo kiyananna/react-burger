@@ -8,9 +8,10 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ScButtonWrapper } from './ProfileSettings.styled';
+import { useAppDispatch  } from '../../../hooks/index';
 
 export const ProfileSettings: FC = () => {
-  const dispatch : any = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { userName, userEmail } = useSelector(getUserData);
   const [isInputsDifferent, setIsInputsDifferent] = useState<boolean>(false);

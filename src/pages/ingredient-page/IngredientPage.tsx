@@ -4,10 +4,12 @@ import { IngredientDetail } from '../../components/burger-ingredients/ingredient
 import { ScWrapper } from './IngredientPage.styled';
 import { TItem } from '../../utils/types';
 import { FC } from 'react';
+import { useAppSelector, useAppDispatch  } from '../../hooks/index';
+import { RootState } from '../../services/store';
 
 export const IngredientPage: FC = () => {
   const { id } = useParams();
-  const ingredient: any = useSelector((state: any) => state.ingredients.ingredients).find(
+  const ingredient = useAppSelector((state: RootState ) => state.ingredients.ingredients).find(
     (item: TItem) => item._id === id,
   );
   console.log(ingredient);

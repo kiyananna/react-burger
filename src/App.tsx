@@ -19,13 +19,14 @@ import { getCookie } from './utils/utils';
 import { Wrapper } from './components/layout/wrapper';
 import { IngredientPage } from './pages/ingredient-page/IngredientPage';
 import { NotFoundPage } from './pages/404-page/404-page';
+import { useAppSelector, useAppDispatch  } from './hooks/index';
 
 const App: FC = () => {
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
   const isAuthorized = getCookie('accessToken') ? true : false;
   const location = useLocation();
-  const forgotPasswordState : any = useSelector(
-    (state: any) => state.recoverPassword.emailRecoverSuccess,
+  const forgotPasswordState  = useAppSelector(
+    (state) => state.recoverPassword.emailRecoverSuccess,
   );
   const state = location.state;
 

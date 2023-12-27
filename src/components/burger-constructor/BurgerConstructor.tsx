@@ -32,6 +32,8 @@ import { useNavigate } from 'react-router-dom';
 import { getUserAuth } from '../../services/user/selectors';
 import { TItemState } from '../../utils/types'
 import { getCookie } from '../../utils/utils';
+import { useAppSelector, useAppDispatch  } from '../../hooks/index';
+import { RootState } from '../../services/store';
 
 
 type ConstructorProps = {
@@ -43,11 +45,9 @@ type ConstructorProps = {
 
 export const BurgerConstructor : FC<ConstructorProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const data: any = useSelector(
-    (state: any) => state.ingredientsConstructor.constructorList,
-  );
+  const data  = useAppSelector((state: RootState) => state.ingredientsConstructor.constructorList);
   
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
   // const isUserAuth = !!useAppSelector(getUserAuth);
   const navigate = useNavigate();
   const userAuth = useSelector((state) => getUserAuth(state));

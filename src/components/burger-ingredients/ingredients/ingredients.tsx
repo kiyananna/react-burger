@@ -3,6 +3,7 @@ import { ScItems } from './ingredients.styled';
 import { useSelector } from 'react-redux';
 import { forwardRef, FC , ForwardedRef} from 'react';
 import { TItem } from '../../../utils/types';
+import { useAppSelector  } from '../../../hooks/index';
 
 interface IProps {
   title: string,
@@ -13,7 +14,7 @@ interface IProps {
 
 
 export const Ingredients: FC<IProps> = forwardRef(({ title, type }, ref) => {
-  const data: any = useSelector((state: any) => state.ingredients.ingredients);
+  const data: any = useAppSelector((state: any) => state.ingredients.ingredients);
   
   return (
     <>
