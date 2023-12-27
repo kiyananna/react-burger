@@ -4,9 +4,11 @@ import {
   ScBottomTitle,
 } from './order-description.styled';
 import { useSelector } from 'react-redux';
+import { useAppSelector  } from '../../../hooks/index';
 
 export const OrderDetails = () => {
   const orderId: any = useSelector((state: any) => state.orderDetail.orderID);
+  // const isLoading = useAppSelector(state => state.orderDetail.isLoading);
   
   return (
     <ScDescription>

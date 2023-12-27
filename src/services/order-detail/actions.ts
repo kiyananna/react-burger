@@ -1,5 +1,6 @@
 import { postOrder } from '../../utils/utils';
 import { API_URL } from '../../constants/constants';
+import { AppDispatch, AppThunk } from "../store";
 export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
@@ -18,11 +19,11 @@ export const getOrderRequest = () => ({
 //   element,
 // });
 
-export const sendOrder = (items: any) => (dispatch: any) => {
+export const sendOrder = (items: any, token: string) => (dispatch: any) => {
   dispatch({
     type: GET_ORDER_REQUEST,
   });
-  postOrder(`${API_URL}orders`, items)
+  postOrder(`${API_URL}orders`, items, token)
     .then((res) => {
       console.log(res);
       dispatch({

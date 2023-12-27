@@ -1,13 +1,30 @@
 import { fetchWithRefresh } from '../../utils/utils';
 export const API_URL = 'https://norma.nomoreparties.space/api/';
 
-export const REFRESH_USER_INFO_REQUEST = 'REFRESH_USER_INFO_REQUEST';
-export const REFRESH_USER_INFO_SUCCESS = 'REFRESH_USER_INFO_SUCCESS';
-export const REFRESH_USER_INFO_FAILED = 'REFRESH_USER_INFO_FAILED';
-export const GET_USER_INFO_REQUEST = 'GET_USER_INFO_REQUEST';
-export const GET_USER_INFO_SUCCESS = 'GET_USER_INFO_SUCCESS';
-export const GET_USER_INFO_FAILED = 'GET_USER_INFO_FAILED';
-export const CLEAN_USER_INFO = 'CLEAN_USER_INFO';
+export const REFRESH_USER_INFO_REQUEST: "REFRESH_USER_INFO_REQUEST" = "REFRESH_USER_INFO_REQUEST";
+export const REFRESH_USER_INFO_SUCCESS: "REFRESH_USER_INFO_SUCCESS" = "REFRESH_USER_INFO_SUCCESS";
+export const REFRESH_USER_INFO_FAILED: "REFRESH_USER_INFO_FAILED" = "REFRESH_USER_INFO_FAILED";
+export const GET_USER_INFO_REQUEST: "GET_USER_INFO_REQUEST" = "GET_USER_INFO_REQUEST";
+export const GET_USER_INFO_SUCCESS: "GET_USER_INFO_SUCCESS" = "GET_USER_INFO_SUCCESS";
+export const GET_USER_INFO_FAILED: "GET_USER_INFO_FAILED" = "GET_USER_INFO_FAILED";
+export const CLEAN_USER_INFO: "CLEAN_USER_INFO" = "CLEAN_USER_INFO";
+
+export interface ICleanUserInfo {
+  readonly type: typeof CLEAN_USER_INFO,
+}
+
+export type TUserActions = 
+// | IRefreshUserRequest
+// | IRefreshUserSuccess
+// | IRefreshUserFailed
+// | IGetUserInfoRequest
+// | IGetUserInfoSuccess
+// | IGetUserInfoFailed
+| ICleanUserInfo
+
+export interface ICleanUserInfo {
+  readonly type: typeof CLEAN_USER_INFO
+}
 
 export const refreshUserInfo = (userName: any, email: any, pass: any, token: any) => (dispatch: any) => {
   dispatch({

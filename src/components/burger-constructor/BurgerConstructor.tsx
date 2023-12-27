@@ -23,13 +23,15 @@ import {
   moveConstructorElement,
 } from '../../services/constructor-ingredients/actions';
 import { v4 as uuidv4 } from 'uuid';
-// import { getOrderRequest } from '../../services/order-detail/actions';
-// import { postOrder } from '../../utils/utils';
+import { getOrderRequest } from '../../services/order-detail/actions';
+import { postOrder } from '../../utils/utils';
 import { nanoid } from 'nanoid';
 import { TItem } from '../../utils/types'
 import { sendOrder } from '../../services/order-detail/actions';
 import { useNavigate } from 'react-router-dom';
 import { getUserAuth } from '../../services/user/selectors';
+import { TItemState } from '../../utils/types'
+import { getCookie } from '../../utils/utils';
 
 
 type ConstructorProps = {
@@ -59,9 +61,22 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
     }
 
     setIsOpen(true);
-    const orderIds = data.map((item: any) => item.data._id);
-    // dispatch(getOrderRequest());
-    dispatch(sendOrder(orderIds));
+    const orderIds = data.filter((item: TItemState) => {
+      return item.data.type !== 'bun'
+    });
+  
+    const bun = data.find((item: TItemState) => item.type === 'bun')!;
+    orderIds.unshift(bun);
+    orderIds.push(bun);
+
+  
+    if (data.length === 0) return
+    const filteredOrderIds = orderIds.map((item: TItemState) => item.data._id);
+    console.log(filteredOrderIds)
+    setIsOpen(true);
+    dispatch(getOrderRequest());
+    dispatch(sendOrder(filteredOrderIds, getCookie('token')!))
+  
   };
 
   const moveElement = useCallback(
