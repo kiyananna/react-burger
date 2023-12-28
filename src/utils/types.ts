@@ -47,6 +47,11 @@ export type TUserState = {
   authChecked: boolean
 }
 
+export type TForgotPass = {
+  success: boolean,
+  message: string
+}
+
 export type TUserInfo = {
   success: boolean
   user: {

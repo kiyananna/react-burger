@@ -34,23 +34,23 @@ export interface ICleanConstructor {
 
 export type TBurgerConstructorActions = | IAddIngredient | IDeleteIngredient | IMoveIngredient | ICleanConstructor | IGetBunItem;
 
-export const getBun = (element : any) => ({
+export const getBun = (element : TItemState) => ({
   type: GET_BUN,
   element,
 });
 
-export const getConstructorElement = (element: any) => ({
+export const getConstructorElement = (element: TItemState) => ({
   type: GET_CONSTRUCTOR_ELEMENT,
   element,
 });
 
-export const moveConstructorElement = (dragIndex: any, hoverIndex: any) => ({
+export const moveConstructorElement = (dragIndex: number, hoverIndex: number) => ({
   type: MOVE_CONSTRUCTOR_ELEMENT,
   dragIndex,
   hoverIndex,
 });
 
-export const deleteConstructorElement = (element: any) => ({
+export const deleteConstructorElement = (element: TItemState) => ({
   type: DELETE_CONSTRUCTOR_ELEMENT,
   element,
 });
