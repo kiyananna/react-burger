@@ -1,4 +1,5 @@
 import { fetchWithRefresh } from '../../utils/utils';
+import { TUserInfo } from "../../utils/types";
 export const API_URL = 'https://norma.nomoreparties.space/api/';
 
 export const REFRESH_USER_INFO_REQUEST: "REFRESH_USER_INFO_REQUEST" = "REFRESH_USER_INFO_REQUEST";
@@ -9,17 +10,43 @@ export const GET_USER_INFO_SUCCESS: "GET_USER_INFO_SUCCESS" = "GET_USER_INFO_SUC
 export const GET_USER_INFO_FAILED: "GET_USER_INFO_FAILED" = "GET_USER_INFO_FAILED";
 export const CLEAN_USER_INFO: "CLEAN_USER_INFO" = "CLEAN_USER_INFO";
 
+export interface IRefreshUserRequest {
+  readonly type: typeof REFRESH_USER_INFO_REQUEST
+}
+
+export interface IRefreshUserSuccess {
+  readonly type: typeof REFRESH_USER_INFO_SUCCESS,
+  payload: TUserInfo
+}
+
+export interface IRefreshUserFailed {
+  readonly type: typeof REFRESH_USER_INFO_FAILED,
+}
+
+export interface IGetUserInfoRequest {
+  readonly type: typeof GET_USER_INFO_REQUEST
+}
+
+export interface IGetUserInfoSuccess {
+  readonly type: typeof GET_USER_INFO_SUCCESS,
+  payload: TUserInfo
+}
+
+export interface IGetUserInfoFailed {
+  readonly type: typeof GET_USER_INFO_FAILED,
+}
+
 export interface ICleanUserInfo {
   readonly type: typeof CLEAN_USER_INFO,
 }
 
 export type TUserActions = 
-// | IRefreshUserRequest
-// | IRefreshUserSuccess
-// | IRefreshUserFailed
-// | IGetUserInfoRequest
-// | IGetUserInfoSuccess
-// | IGetUserInfoFailed
+| IRefreshUserRequest
+| IRefreshUserSuccess
+| IRefreshUserFailed
+| IGetUserInfoRequest
+| IGetUserInfoSuccess
+| IGetUserInfoFailed
 | ICleanUserInfo
 
 export interface ICleanUserInfo {

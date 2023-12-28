@@ -38,6 +38,23 @@ export type TItemState = {
   type: string,
 }
 
+export type TUserState = {
+  userName: string,
+  userEmail: string,
+  userInfoRequest: boolean,
+  userRefreshRequest: boolean,
+  userInfoFailed: boolean,
+  authChecked: boolean
+}
+
+export type TUserInfo = {
+  success: boolean
+  user: {
+    name: string,
+    email: string
+  }
+}
+
 export type TOrderFeed = {
   success: boolean,
   orders: TOrderFeedOptions[],

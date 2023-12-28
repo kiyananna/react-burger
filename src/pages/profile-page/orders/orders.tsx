@@ -15,7 +15,7 @@ export const Orders: FC = () => {
   useEffect(() => {
     dispatch(orderHistoryStart(`wss://norma.nomoreparties.space/orders?token=${getCookie('token')}`))
     return () => {
-      dispatch(orderHistoryClose('closed by client'))
+      dispatch(orderHistoryClose('closed'))
     }
   }, [])
 

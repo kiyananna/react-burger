@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import styles from './order-card.module.css';
 import { getIngredientImages } from '../../../../utils/utils';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TItem, TOrderFeedOptions } from '../../../../utils/types';
 import { useAppSelector } from '../../../../hooks';
+import { ScOrderCard, ScOrderCardHeader, ScOrderCardIngredients, ScCardIngredientsIcons, ScIconWrapper, ScIconWrapperCount, ScCardIngredientIcon, ScOrderCardPrice } from './order-card.styled';
 
 export const OrderCard: FC<{ data: TOrderFeedOptions}> = ({ data }) => {
   let count = 7;
@@ -30,63 +30,60 @@ export const OrderCard: FC<{ data: TOrderFeedOptions}> = ({ data }) => {
   }
 
   return (
-    <div className={`${styles.OrderCard} p-6 mb-4`}>
-    <div className={`${styles.OrderCardHeader} mb-6`}>
+    <ScOrderCard className='p-6 mb-4'>
+    <ScOrderCardHeader className='mb-6'>
       <p className="text text_type_digits-default">{data.number}</p>
       <p className="text text_type_main-default text_color_inactive">
         <FormattedDate date={orderDate} />
       </p>
-    </div>
-    <h2 className={`${styles.OrderCardTitle}text text_type_main-medium mb-6`}>
+    </ScOrderCardHeader>
+    <h2 className='text text_type_main-medium mb-6'>
       { data.name }
     </h2>
-    <div className={`${styles.OrderCardIngredients}`}>
-      <div className={`${styles.CardIngredientsIcons}`}>
+    <ScOrderCardIngredients>
+      <ScCardIngredientsIcons>
         { 
           images.map((item, index) => {
           if (index >= 5) return;
             return (
-              <div 
+              <ScIconWrapper
                   key={item._id}
-                  className={`${styles.IconWrapper}`}
                   data-contet={data.ingredients.length}
                   style={{ zIndex: count-- }}
                 >
-                <img 
-                  className={`${styles.CardIngredientIcon}`} 
+                <ScCardIngredientIcon
                   src={item.image_mobile} alt={item.name} 
                   width={64}
                   height={64}
                 />
-              </div>
+              </ScIconWrapper>
             )
           })
         }
         {
           images.length > 6 && (
-          <div 
+          <ScIconWrapper 
             key={images[6]._id}
-            className={`${styles.IconWrapper}`}
             data-contet={data.ingredients.length}
           >
-            <p className={`${styles.IconWrapperCount} text text_type_digits-default`}>+{images.length - 6}</p>
-            <img 
-              className={`${styles.CardIngredientIcon} disabled`} 
+            <ScIconWrapperCount className='text text_type_digits-default'>+{images.length - 6}</ScIconWrapperCount>
+            <ScCardIngredientIcon
+              className='disabled' 
               src={images[6].image_mobile} alt={images[6].name} 
               width={64}
               height={64}
               style={{ zIndex: 1 }}
             />
-          </div>
+          </ScIconWrapper >
           )
         }
-      </div>
-      <p className={`${styles.OrderCardPrice} text text_type_digits-default`}>
+      </ScCardIngredientsIcons>
+      <ScOrderCardPrice className='text text_type_digits-default'>
         { totalPrice }
   
         <CurrencyIcon type="primary" />
-      </p>
-    </div>
-  </div>
+      </ScOrderCardPrice>
+    </ScOrderCardIngredients>
+  </ScOrderCard>
   )
 }

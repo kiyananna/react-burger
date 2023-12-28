@@ -17,6 +17,7 @@ import { orderHistoryActions, TOrderHistoryActions } from "./order-history/actio
 import { TBurgerConstructorActions } from "./constructor-ingredients/actions";
 import { ICleanUserInfo } from "./user/actions";
 import { orderHistoryReducer } from "./order-history/reducers";
+import { orderFeedReducer } from "./order-feed/reducers";
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   user: userReduser,
   recoverPassword: recoverPasswordReducer,
   resetPassword: passwordResetReduser,
-  historySocket: orderHistoryReducer
+  historySocket: orderHistoryReducer,
+  feedSocket: orderFeedReducer,
 });
 
 export const store = configureStore({

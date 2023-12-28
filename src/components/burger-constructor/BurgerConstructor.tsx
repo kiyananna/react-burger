@@ -50,7 +50,7 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
   const dispatch = useAppDispatch();
   // const isUserAuth = !!useAppSelector(getUserAuth);
   const navigate = useNavigate();
-  const userAuth = useSelector((state) => getUserAuth(state));
+  const userAuth = useAppSelector((state) => getUserAuth(state));
 
   
 
