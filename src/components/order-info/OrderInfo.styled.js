@@ -1,65 +1,67 @@
-.info {
+import styled from 'styled-components';
+
+export const ScContainer = styled.div`
   max-width: 640px;
   margin: 0 auto;
-}
+`;
 
-.ingredients {
+export const ScIngredientsWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   max-height: 312px;
   overflow-y: scroll;
   padding: 0;
   margin: 0;
-}
+`;
 
-.ingredient {
+export const ScIngredient = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
   margin: 16px 24px 0 0;
-}
 
-.ingredient:first-child {
-  margin-top: 0;
-}
+  &:first-child {
+    margin-top: 0;
+  }
+`;
 
-.description {
+export const ScDescription = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
+`;
 
-.price {
+export const ScPrice = styled.p`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
+`;
 
-.picture {
+export const ScPicture = styled.div`
   display: flex;
   align-items: center;
-}
+`;
 
-.footer {
+export const ScFooter = styled.div`
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: space-between;
-}
+`;
 
-.number {
+export const ScNumber = styled.div`
   text-align: center;
-}
+`;
 
-.done {
-  color: #00CCCC;
-}
+export const ScDone = styled.span`
+  color: #00cccc;
+`;
 
-.icon {
+export const ScIcon = styled.img`
   max-width: 64px;
   border-radius: 100px;
-  border: 2px solid var(--button-normal, #801AB2);
+  border: 2px solid var(--button-normal, #801ab2);
   background: var(--interface-bg, #131316);
   object-fit: cover;
-}
+`;

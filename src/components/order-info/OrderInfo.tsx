@@ -1,7 +1,7 @@
 /* eslint-disable no-loop-func */
 import React, { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import orderStyles from './order-info.module.css';
+import { ScContainer, ScIngredientsWrapper, ScIngredient, ScDescription, ScPrice, ScPicture, ScFooter, ScNumber, ScDone, ScIcon } from "./OrderInfo.styled";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { TItem, TOrderFeedOptions,  } from "../../utils/types";
@@ -89,11 +89,11 @@ export const OrderInfo: FC = () => {
 
   return (
     data !== null ?
-      <div className={orderStyles.info}>
-        <div className={orderStyles.number}>
+      <ScContainer>
+        <ScNumber>
           <p className="text text_type_digits-default mt-6">#{data.number}</p>
-        </div>
-        <div className={orderStyles.description}>
+        </ScNumber>
+        <ScDescription>
           <p className="text text_type_main-medium mt-10">{data.name}</p>
           {data.status === "created" &&
             <p className="text text_type_main-default mt-2">
@@ -106,45 +106,45 @@ export const OrderInfo: FC = () => {
             </p>
           }
           {data.status === 'done' &&
-            <div className={orderStyles.done}>
+            <ScDone>
               <p className="text text_type_main-default mt-2">
                 Выполнен
               </p>
-            </div>
+            </ScDone>
           }
           <p className="text text_type_main-medium mt-15 mb-6">
             Состав:
           </p>
-        </div>
-        <ul className={`${orderStyles.ingredients} custom-scroll`}>
+        </ScDescription>
+        <ScIngredientsWrapper className='custom-scroll'>
   {orderIngredients.map((ingredient) => {
     const ingredientType = ingredient.type === 'bun' ? '2 x ' : `${ingredient.__v} x `;
     
     return (
-      <li key={uuid()} className={orderStyles.ingredient}>
-        <div className={orderStyles.picture}>
-          <img className={orderStyles.icon} width={64} height={64} src={ingredient.image_mobile} alt={ingredient.name} />
+      <ScIngredient key={uuid()}>
+        <ScPicture>
+          <ScIcon width={64} height={64} src={ingredient.image_mobile} alt={ingredient.name} />
           <p className="text text_type_main-default ml-4">{ingredient.name}</p>
-        </div>
-        <div className={orderStyles.price}>
+        </ScPicture>
+        <ScPrice>
           <p className="text text_type_digits-default mr-2">{ingredientType}{ingredient.price}</p>
           <CurrencyIcon type="primary" />
-        </div>
-      </li>
+        </ScPrice>
+      </ScIngredient>
             );
          })}
-          </ul>
-        <div className={orderStyles.footer}>
+          </ScIngredientsWrapper>
+        <ScFooter>
           {orderDate &&
             <p className="text text_type_main-default text_color_inactive mt-10 mb-10">
               <FormattedDate date={orderDate} />
             </p>}
-          <div className={orderStyles.price}>
+          <ScPrice>
             <p className="text text_type_digits-default mr-2">{totalPrice}</p>
             <CurrencyIcon type="primary" />
-          </div>
-        </div>
-      </div>
+          </ScPrice>
+        </ScFooter>
+      </ScContainer>
       :
       <p className="text text_type_main-large mt-10 mb-10">
         LOADING...

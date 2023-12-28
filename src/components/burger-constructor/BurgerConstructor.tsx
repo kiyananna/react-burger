@@ -13,7 +13,7 @@ import {
 } from './BurgerConstructor.styled';
 import { IngredientCard } from './ingredient-card/IngredientCard';
 import { Modal } from '../modal/modal';
-import { OrderDetails } from './order-description/order-description';
+import { OrderDetails } from './order-description/OrderDescription';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import {

@@ -2,7 +2,7 @@ import {
   ScDescription,
   ScTitle,
   ScBottomTitle,
-} from './order-description.styled';
+} from './OrderDescription.styled';
 import { useSelector } from 'react-redux';
 import { useAppSelector } from '../../../hooks/index';
 

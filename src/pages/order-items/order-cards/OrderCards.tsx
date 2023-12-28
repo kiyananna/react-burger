@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { OrderCard } from './order-card/order-card';
 import { useAppSelector } from '../../../hooks';
 import { useLocation } from 'react-router-dom';
-import { ScOrderCards, ScLink } from './order-cards.styled';
+import { ScOrderCards, ScLink } from './OrderCards.styled';
 
 export const OrderCards: FC = () => {
   const { orderFeed } = useAppSelector(state => state.feedSocket);

@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
-import { OrderCards } from './order-cards/order-cards';
-import { OrderInfo } from './order-info/order-info';
+import { OrderCards } from './order-cards/OrderCards';
+import { OrderInfo } from './order-info/OrderInfo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { orderFeedClose, orderFeedStart } from '../../services/order-feed/actions';
-import { ScOrderListWrapper } from './order-items.styled';
+import { ScOrderListWrapper } from './OrderItems.styled';
 
 export const OrderItems: FC = () => {
   const dispatch = useAppDispatch()
