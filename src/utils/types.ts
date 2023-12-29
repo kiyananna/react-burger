@@ -47,9 +47,43 @@ export type TUserState = {
   authChecked: boolean
 }
 
+export type TUserLogin = {
+  success: boolean,
+  accessToken: string,
+  refreshToken: string,
+  user: {
+      email: string,
+      name: string
+  }
+}
+
 export type TForgotPass = {
   success: boolean,
   message: string
+}
+
+export type TOptions = {
+  createdAt: string,
+  ingredients: TItem[],
+  name: string,
+  number: number,
+  owner: {
+    name: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string
+  }
+  price: number,
+  status: string
+  updatedAt: string
+  _id: string
+}
+
+export type TOrderResponse = {
+  name: string,
+  order?: TOptions,
+  success: boolean,
+  orderID?: string,
 }
 
 export type TUserInfo = {

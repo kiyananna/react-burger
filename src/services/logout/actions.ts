@@ -1,12 +1,32 @@
 import { API_URL } from '../../constants/constants';
 import { CLEAN_USER_INFO } from '../user/actions';
 import { CLEAN_LOGIN_INFO } from '../login/actions';
+import { AppDispatch, AppThunk } from "../store";
 
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILED = 'LOG_OUT_FAILED';
 
-export const logOut = (token: any) => async (dispatch: any) => {
+
+export interface ILogoutRequest {
+  readonly type: typeof LOG_OUT_REQUEST
+}
+
+export interface ILogoutSuccess {
+  readonly type: typeof LOG_OUT_SUCCESS,
+}
+
+export interface ILogoutFailed {
+  readonly type: typeof LOG_OUT_FAILED,
+  payload: string
+}
+
+export type TLogoutActions = 
+| ILogoutRequest
+| ILogoutSuccess
+| ILogoutFailed
+
+export const logOut: AppThunk = (token: string) => async (dispatch: AppDispatch) => {
   dispatch({
     type: LOG_OUT_REQUEST,
   });

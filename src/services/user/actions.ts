@@ -1,5 +1,6 @@
 import { fetchWithRefresh } from '../../utils/utils';
 import { TUserInfo } from "../../utils/types";
+import { AppDispatch, AppThunk } from "../store";
 export const API_URL = 'https://norma.nomoreparties.space/api/';
 
 export const REFRESH_USER_INFO_REQUEST: "REFRESH_USER_INFO_REQUEST" = "REFRESH_USER_INFO_REQUEST";
@@ -53,7 +54,7 @@ export interface ICleanUserInfo {
   readonly type: typeof CLEAN_USER_INFO
 }
 
-export const refreshUserInfo = (userName: any, email: any, pass: any, token: any) => (dispatch: any) => {
+export const refreshUserInfo = (userName: string, email: string, pass: string, token: string | undefined) => (dispatch: AppDispatch) => {
   dispatch({
     type: REFRESH_USER_INFO_REQUEST,
   });
@@ -85,7 +86,7 @@ export const refreshUserInfo = (userName: any, email: any, pass: any, token: any
     });
 };
 
-export const getUserInfo = (token: any) => (dispatch: any) => {
+export const getUserInfo: AppThunk = (token: string) => (dispatch: AppDispatch) => {
   dispatch({
     type: GET_USER_INFO_REQUEST,
   });

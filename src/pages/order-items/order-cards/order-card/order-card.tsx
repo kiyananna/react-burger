@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../../hooks';
 import { ScOrderCard, ScOrderCardHeader, ScOrderCardIngredients, ScCardIngredientsIcons, ScIconWrapper, ScIconWrapperCount, ScCardIngredientIcon, ScOrderCardPrice } from './order-card.styled';
 
 export const OrderCard: FC<{ data: TOrderFeedOptions}> = ({ data }) => {
-  let count = 7;
+  let count = 5;
   const orderDate = new Date(data.createdAt);
   const { ingredients } = useAppSelector(state => state.ingredients);
   let totalPrice: number = 0;

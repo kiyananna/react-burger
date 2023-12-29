@@ -1,13 +1,19 @@
 import {
   GET_INGREDIENT_DESCRIPTION,
   CLEAR_INGREDIENT_DESCRIPTION,
+  TIngredientDetailActions
 } from './actions';
+import { TItem } from "../../utils/types";
+
+type TIngredientState = {
+  ingredientDetail: TItem | null
+}
 
 const initialState = {
-  ingredientDetail: {},
+  ingredientDetail: null,
 };
 
-export const ingredientDetailReducer = (state = initialState, action: any) => {
+export const ingredientDetailReducer = (state: TIngredientState = initialState, action:   TIngredientDetailActions): TIngredientState => {
   switch (action.type) {
     case GET_INGREDIENT_DESCRIPTION: {
       return {
@@ -18,7 +24,7 @@ export const ingredientDetailReducer = (state = initialState, action: any) => {
     case CLEAR_INGREDIENT_DESCRIPTION: {
       return {
         ...state,
-        ingredientDetail: {},
+        ingredientDetail: null,
       };
     }
     default: {

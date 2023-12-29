@@ -1,9 +1,11 @@
 import { postOrder } from '../../utils/utils';
+import { TItem, TOptions } from "../../utils/types";
 import { API_URL } from '../../constants/constants';
 import { AppDispatch, AppThunk } from "../store";
 export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
+
 
 export const getOrderRequest = () => ({
   type: GET_ORDER_REQUEST,
@@ -19,7 +21,7 @@ export const getOrderRequest = () => ({
 //   element,
 // });
 
-export const sendOrder = (items: any, token: string) => (dispatch: any) => {
+export const sendOrder: AppThunk = (items: string[], token: string) => (dispatch: AppDispatch) => {
   dispatch({
     type: GET_ORDER_REQUEST,
   });
@@ -38,3 +40,27 @@ export const sendOrder = (items: any, token: string) => (dispatch: any) => {
       });
     });
 };
+
+export type TOrderResponse = {
+  orderID?: string,
+}
+
+export interface IGetOrderRequest {
+  readonly type: typeof GET_ORDER_REQUEST
+}
+
+export interface IGetOrderSuccess {
+  readonly type: typeof GET_ORDER_SUCCESS,
+  element: string
+}
+
+export interface IGetOrderFailed {
+  readonly type: typeof GET_ORDER_FAILED,
+  element: string
+}
+
+export type TGetOrderFailedActions = 
+| IGetOrderRequest
+| IGetOrderSuccess
+| IGetOrderFailed
+

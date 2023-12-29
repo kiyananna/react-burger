@@ -10,7 +10,7 @@ const initialState = {
   errorText: '',
 }
 
-export const registerReducer = (state = initialState, action: any) => {
+export const registerReducer = (state: TRegisterState = initialState, action: any): TRegisterState => {
   switch (action.type) {
     case REGISTER_REQUEST: {
       return { ...state, isLoading: true, errorText: '', }
@@ -24,4 +24,11 @@ export const registerReducer = (state = initialState, action: any) => {
     default:
       return state
   }
+}
+
+
+type TRegisterState = {
+  response: {} | null,
+  isLoading: boolean,
+  errorText: string
 }
