@@ -34,6 +34,7 @@ import { TItemState } from '../../utils/types'
 import { getCookie } from '../../utils/utils';
 import { useAppSelector, useAppDispatch  } from '../../hooks/index';
 import { RootState } from '../../services/store';
+import { getUserInfo } from '../../services/user/actions';
 
 
 type ConstructorProps = {
@@ -52,7 +53,11 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
   const navigate = useNavigate();
   const userAuth = useAppSelector((state) => getUserAuth(state));
 
-  
+  useEffect(() => {
+    if (getCookie('accessToken')) {
+      dispatch(getUserInfo(getCookie('accessToken')!));
+    }
+  }, [])
 
   const handleOpen = () => {
   
