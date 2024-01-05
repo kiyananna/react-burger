@@ -1,7 +1,7 @@
-import { fetchWithRefresh } from '../../utils/utils';
-import { TUserInfo } from "../../utils/types";
+import { fetchWithRefresh } from "../../utils/utils";
+import { API_URL } from "../../constants/constants";
 import { AppDispatch, AppThunk } from "../store";
-export const API_URL = 'https://norma.nomoreparties.space/api/';
+import { TUserInfo } from "../../utils/types";
 
 export const REFRESH_USER_INFO_REQUEST: "REFRESH_USER_INFO_REQUEST" = "REFRESH_USER_INFO_REQUEST";
 export const REFRESH_USER_INFO_SUCCESS: "REFRESH_USER_INFO_SUCCESS" = "REFRESH_USER_INFO_SUCCESS";
@@ -50,72 +50,76 @@ export type TUserActions =
 | IGetUserInfoFailed
 | ICleanUserInfo
 
+
 export interface ICleanUserInfo {
   readonly type: typeof CLEAN_USER_INFO
 }
-
-export const refreshUserInfo = (userName: string, email: string, pass: string, token: string | undefined) => (dispatch: AppDispatch) => {
+export const refreshUserInfo: AppThunk = (userName: string, email: string, pass: string, token: string) => {
+  return function (dispatch: AppDispatch) {
   dispatch({
     type: REFRESH_USER_INFO_REQUEST,
-  });
+  })
   fetchWithRefresh(`${API_URL}auth/user`, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify({
-      email: email,
-      password: pass,
-      name: userName,
-    }),
-  })
-    .then((res) => {
-      if (res) {
-        dispatch({
-          type: REFRESH_USER_INFO_SUCCESS,
-          res: res,
-        });
-      }
+      "email": email,
+      "password": pass,
+      "name": userName
     })
-    .catch((err) => {
-      console.log(err);
+  })
+  .then(res => {
+    if (res) {
       dispatch({
-        type: REFRESH_USER_INFO_FAILED,
-      });
-    });
-};
+        type: REFRESH_USER_INFO_SUCCESS,
+        res: res
+      })
+    }
+  })
+  .catch(err => {
+    console.log(err)
+    dispatch({
+      type: REFRESH_USER_INFO_FAILED
+    })
+  })
+  }
+}
 
-export const getUserInfo: AppThunk = (token: string) => (dispatch: AppDispatch) => {
+export const getUserInfo: AppThunk = (token: string) => {
+  return function (dispatch: AppDispatch) {
   dispatch({
-    type: GET_USER_INFO_REQUEST,
-  });
+    type: GET_USER_INFO_REQUEST
+  })
   fetchWithRefresh(`${API_URL}auth/user`, {
-    method: 'GET',
+    method: "GET",
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     },
   })
-    .then((res) => {
-      if (res) {
-        dispatch({
-          type: GET_USER_INFO_SUCCESS,
-          res: res,
-        });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
+  .then(res => {
+    if (res) {
       dispatch({
-        type: GET_USER_INFO_FAILED,
-      });
-    });
-};
+        type: GET_USER_INFO_SUCCESS,
+        res: res
+      })
+    }
+  })
+  .catch((err) => {
+      dispatch({
+        type: GET_USER_INFO_FAILED
+      })
+    }
+  )
+  }
+}
 
 export const cleanUserInfo = () => {
   return {
-    type: CLEAN_USER_INFO,
-  };
-};
+    type: CLEAN_USER_INFO
+  }
+}

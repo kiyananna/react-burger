@@ -8,12 +8,12 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ScButtonWrapper } from './ProfileSettings.styled';
-import { useAppDispatch  } from '../../../hooks/index';
+import { useAppSelector, useAppDispatch  } from '../../../hooks/index';
 
 export const ProfileSettings: FC = () => {
   const dispatch = useAppDispatch();
 
-  const { userName, userEmail } = useSelector(getUserData);
+  const { userName, userEmail } = useAppSelector(getUserData);
   const [isInputsDifferent, setIsInputsDifferent] = useState<boolean>(false);
   const [nameValue, setNameValue] = useState<string>(userName ? userName : '');
   const inputNameRef = useRef<HTMLInputElement>(null);
@@ -135,3 +135,4 @@ export const ProfileSettings: FC = () => {
     </div>
   );
 };
+

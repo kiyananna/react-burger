@@ -13,7 +13,7 @@ export const Orders: FC = () => {
   const { orderHistory } = useAppSelector(state => state.historySocket)
 
   useEffect(() => {
-    dispatch(orderHistoryStart(`wss://norma.nomoreparties.space/orders?token=${getCookie('token')}`))
+    dispatch(orderHistoryStart(`wss://norma.nomoreparties.space/orders?token=${getCookie('accessToken')}`))
     return () => {
       dispatch(orderHistoryClose('closed'))
     }

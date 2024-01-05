@@ -33,7 +33,7 @@ export const OrderInfo: FC = () => {
       }
     }
     if (!orderHistory && orderId) {
-      dispatch(orderHistoryStart(`wss://norma.nomoreparties.space/orders?token=${getCookie('token')}`))
+      dispatch(orderHistoryStart(`wss://norma.nomoreparties.space/orders?token=${getCookie('accessToken')}`))
       return () => {
         dispatch(orderHistoryClose('closed'))
       }

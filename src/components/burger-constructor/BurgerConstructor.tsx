@@ -80,7 +80,7 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
     console.log(filteredOrderIds)
     setIsOpen(true);
     dispatch(getOrderRequest());
-    dispatch(sendOrder(filteredOrderIds, getCookie('token')!))
+    dispatch(sendOrder(filteredOrderIds, getCookie('accessToken')!))
   
   };
 
