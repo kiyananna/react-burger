@@ -11,7 +11,7 @@ type TLogoutState = {
   logOutFailed: boolean,
 }
 
-export const logOutReduser = (state: TLogoutState  = initialState, action: TLogoutActions) => {
+export const logOutReduser = (state: TLogoutState  = initialState, action: TLogoutActions): TLogoutState => {
   switch (action.type) {
     case LOG_OUT_REQUEST: {
       return {

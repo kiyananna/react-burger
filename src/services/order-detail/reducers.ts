@@ -1,4 +1,5 @@
 import { TOptions } from '../../utils/types';
+
 import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
@@ -16,7 +17,7 @@ export type TOrderResponse = {
 }
 
 
-export const orderReducer = (state = initialState, action: TGetOrderFailedActions) => {
+export const orderReducer = (state:TOrderDetailState = initialState, action: TGetOrderFailedActions): TOrderDetailState => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return { ...state, orderID: '' };
@@ -27,9 +28,7 @@ export const orderReducer = (state = initialState, action: TGetOrderFailedAction
     case GET_ORDER_FAILED: {
       return {
         ...state,
-        orderID: 'fgfg',
-        errorText: action.element,
-        isLoading: false,
+        orderID: 'fgfg'
       };
     }
     default:
@@ -37,9 +36,6 @@ export const orderReducer = (state = initialState, action: TGetOrderFailedAction
   }
 };
 
-// type TOrderDetailState = {
-//   order: TOptions | undefined,
-//   isLoading: boolean,
-//   error: boolean,
-//   errorText: string
-// }
+type TOrderDetailState = {
+  orderID: string | undefined,
+}

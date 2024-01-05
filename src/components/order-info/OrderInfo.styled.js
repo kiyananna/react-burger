@@ -32,7 +32,7 @@ export const ScDescription = styled.div`
   justify-content: flex-start;
 `;
 
-export const ScPrice = styled.p`
+export const ScPrice = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;

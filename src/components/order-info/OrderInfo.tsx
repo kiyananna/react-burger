@@ -121,7 +121,7 @@ export const OrderInfo: FC = () => {
     const ingredientType = ingredient.type === 'bun' ? '2 x ' : `${ingredient.__v} x `;
     
     return (
-      <ScIngredient key={uuid()}>
+      <ScIngredient key={ingredient._id}>
         <ScPicture>
           <ScIcon width={64} height={64} src={ingredient.image_mobile} alt={ingredient.name} />
           <p className="text text_type_main-default ml-4">{ingredient.name}</p>
