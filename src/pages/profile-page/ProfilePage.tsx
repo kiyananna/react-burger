@@ -12,7 +12,7 @@ import {
 } from './ProfilePage.styled';
 
 export const ProfilePage: FC = () => {
-  const dispatch: any = useAppDispatch();
+  const dispatch = useAppDispatch();
   const token = getCookie('refreshToken');
   const navigate = useNavigate();
 

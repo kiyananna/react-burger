@@ -15,7 +15,7 @@ export const OrderCard: FC<{ data: TOrderFeedOptions}> = ({ data }) => {
 
   if (ingredients.length) {
     data.ingredients.forEach((ingredient: string) => {
-      ingredients.forEach((element : any) => {
+      ingredients.forEach((element : TItem) => {
         if (element._id === ingredient) {
           if (element.type === 'bun') {
             totalPrice = totalPrice + (element.price * 2)

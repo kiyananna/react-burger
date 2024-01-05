@@ -13,7 +13,7 @@ import { useAppSelector, useAppDispatch  } from '../../hooks/index';
 export const LoginPage: FC  = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { loginData } :any = useAppSelector(
+  const { loginData } = useAppSelector(
     (state) => state.login,
   );
   const [isPassType, setIsPassType] = useState(true);

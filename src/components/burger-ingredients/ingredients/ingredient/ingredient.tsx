@@ -13,7 +13,7 @@ import {
 import { IngredientDetail } from '../ingredient-detail/ingredient-detail';
 import { Modal } from '../../../modal/modal';
 import { useDrag } from 'react-dnd';
-import { TItem } from '../../../../utils/types';
+import { TItem, TItemState } from '../../../../utils/types';
 import {
   getIngredientDescription,
   clearIngredientDescription,
@@ -21,6 +21,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch  } from '../../../../hooks/index';
+
 
 
 type IProps = {
@@ -64,7 +65,7 @@ export const Ingredient: FC <IProps> = ({ data }) => {
   );
 
   const count = useMemo(() => {
-    return constructorList.reduce((count: any, item: any) => {
+    return constructorList.reduce((count: number, item: TItemState) => {
       if (item.data._id === data._id) {
         return item.type === 'bun' ? count + 2 : count + 1;
       }

@@ -10,9 +10,9 @@ import { useAppSelector, useAppDispatch  } from '../../hooks/index';
 import { RootState } from '../../services/store';
 
 export const RegisterPage: FC = () => {
-  const dispatch: any  = useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { response, errorText } : any = useAppSelector((state: RootState ) => state.register);
+  const { response, errorText }  = useAppSelector((state: RootState ) => state.register);
   const [isPassType, setIsPassType] = useState<boolean>(true);
   const [nameValue, setNameValue] = useState<string>('');
   const inputNameRef = useRef<HTMLInputElement>(null);

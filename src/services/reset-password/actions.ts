@@ -30,7 +30,7 @@ export type TPasswordResetActions =
 | IPasswordResetRequest
 | IPasswordResetSuccess
 | IPasswordResetFailed
-| IPasswordResetFailed
+| IPasswordResetClean
 
 export const resetPassword: AppThunk = (pass: string, token: string) => (dispatch: AppDispatch) => {
   dispatch({ type: PASSWORD_RESET_REQUEST });

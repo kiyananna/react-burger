@@ -13,7 +13,7 @@ interface IProps {
 
 
 export const Ingredients: FC<IProps> = forwardRef(({ title, type }, ref) => {
-  const data: any = useAppSelector((state: any) => state.ingredients.ingredients);
+  const data = useAppSelector((state) => state.ingredients.ingredients);
   
   return (
     <>

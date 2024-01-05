@@ -31,7 +31,7 @@ export const getIngredientImages = (ingredients: Array<TItemIngredient>, ids: Ar
 //   }
 
 
-export const postOrder = async (url: string, body: any, token?: string) => {
+export const postOrder = async (url: string, body: string[], token?: string) => {
   console.log(body)
   const response = await fetch(url, {
     method: 'POST',
@@ -121,7 +121,7 @@ export const fetchWithRefresh = async (url: string, options: any) => {
       (err as { message: string }).message === 'invalid token'
     ) {
       const refreshData = await refreshToken(getCookie('refreshToken'));
-      await checkResponse(refreshData).then((refreshData : any) => {
+      await checkResponse(refreshData).then((refreshData) => {
         options.headers.Authorization = refreshData.accessToken;
         setCookie('accessToken', refreshData.accessToken);
         setCookie('refreshToken', refreshData.refreshToken);
