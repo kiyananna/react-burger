@@ -1,6 +1,5 @@
 import { Ingredient } from './ingredient/ingredient';
 import { ScItems } from './ingredients.styled';
-import { useSelector } from 'react-redux';
 import { forwardRef, FC , ForwardedRef} from 'react';
 import { TItem } from '../../../utils/types';
 import { useAppSelector  } from '../../../hooks/index';

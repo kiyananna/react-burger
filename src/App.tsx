@@ -1,6 +1,5 @@
 import { AppHeader } from './components/app-header/AppHeader';
 import React, { useEffect , FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from './services/ingredients/actions';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';

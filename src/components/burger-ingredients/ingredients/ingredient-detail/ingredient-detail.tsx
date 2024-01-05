@@ -1,4 +1,4 @@
-// import { useSelector } from 'react-redux';
+
 import { ScWrapper, ScTitle, ScList, ScItem } from './ingredient-detail.styled';
 import { TItem } from '../../../../utils/types';
 

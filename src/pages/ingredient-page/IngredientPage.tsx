@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { IngredientDetail } from '../../components/burger-ingredients/ingredients/ingredient-detail/ingredient-detail';
 import { ScWrapper } from './IngredientPage.styled';

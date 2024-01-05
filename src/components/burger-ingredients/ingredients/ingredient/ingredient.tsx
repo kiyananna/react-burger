@@ -18,7 +18,6 @@ import {
   getIngredientDescription,
   clearIngredientDescription,
 } from '../../../../services/ingredient-detail/actions';
-import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch  } from '../../../../hooks/index';
@@ -37,7 +36,7 @@ export const Ingredient: FC <IProps> = ({ data }) => {
 
   const location = useLocation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleModalOpen = () => {
     setIsOpen(true);

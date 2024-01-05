@@ -1,5 +1,4 @@
 import { useState, useRef,FC, useEffect, FormEvent, ChangeEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link  } from 'react-router-dom';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { recoverPassword, cleanRecoverPassword } from '../../services/forgot-password/actions';

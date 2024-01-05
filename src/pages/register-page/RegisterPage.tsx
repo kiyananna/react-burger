@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, ChangeEvent, FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   Input,
   Button,
@@ -14,7 +13,6 @@ export const RegisterPage: FC = () => {
   const dispatch: any  = useAppDispatch();
   const navigate = useNavigate();
   const { response, errorText } : any = useAppSelector((state: RootState ) => state.register);
-  // const { errorText } = useSelector((state) => state.register);
   const [isPassType, setIsPassType] = useState<boolean>(true);
   const [nameValue, setNameValue] = useState<string>('');
   const inputNameRef = useRef<HTMLInputElement>(null);

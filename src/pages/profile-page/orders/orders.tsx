@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { useAppSelector } from "../../../hooks/index";
+import { useAppSelector, useAppDispatch } from "../../../hooks/index";
 import { orderHistoryClose, orderHistoryStart } from "../../../services/order-history/actions";
 import { getCookie } from "../../../utils/utils";
 import { OrderCard } from "../../order-items/order-cards/order-card/order-card";
@@ -9,7 +8,7 @@ import styles from './orders.module.css'
 
 export const Orders: FC = () => {
   const location = useLocation()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { orderHistory } = useAppSelector(state => state.historySocket)
 
   useEffect(() => {

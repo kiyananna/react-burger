@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, FC, ChangeEvent, FormEvent, RefObject, Dispatch, SetStateAction } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from '../../../services/user/selectors';
 import { getCookie } from '../../../utils/utils';
 import { getUserInfo, refreshUserInfo } from '../../../services/user/actions';

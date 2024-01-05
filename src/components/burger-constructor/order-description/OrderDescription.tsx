@@ -3,7 +3,6 @@ import {
   ScTitle,
   ScBottomTitle,
 } from './OrderDescription.styled';
-import { useSelector } from 'react-redux';
 import { useAppSelector } from '../../../hooks/index';
 
 

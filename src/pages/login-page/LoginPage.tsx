@@ -5,7 +5,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../services/login/actions';
 import { useAppSelector, useAppDispatch  } from '../../hooks/index';
 import { RootState } from '../../services/store';
