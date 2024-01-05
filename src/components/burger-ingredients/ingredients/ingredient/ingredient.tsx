@@ -21,7 +21,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch  } from '../../../../hooks/index';
-import { RootState } from '../../../../services/store';
+
 
 type IProps = {
   data: TItem;
@@ -60,7 +60,7 @@ export const Ingredient: FC <IProps> = ({ data }) => {
   );
 
   const constructorList = useAppSelector(
-    (state: RootState) => state.ingredientsConstructor.constructorList,
+    (state) => state.ingredientsConstructor.constructorList,
   );
 
   const count = useMemo(() => {

@@ -32,7 +32,6 @@ import { getUserAuth } from '../../services/user/selectors';
 import { TItemState } from '../../utils/types'
 import { getCookie } from '../../utils/utils';
 import { useAppSelector, useAppDispatch  } from '../../hooks/index';
-import { RootState } from '../../services/store';
 import { getUserInfo } from '../../services/user/actions';
 
 
@@ -45,7 +44,7 @@ type ConstructorProps = {
 
 export const BurgerConstructor : FC<ConstructorProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const data  = useAppSelector((state: RootState) => state.ingredientsConstructor.constructorList);
+  const data  = useAppSelector((state) => state.ingredientsConstructor.constructorList);
   
   const dispatch = useAppDispatch();
   // const isUserAuth = !!useAppSelector(getUserAuth);

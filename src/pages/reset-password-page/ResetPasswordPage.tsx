@@ -6,7 +6,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { resetPassword } from '../../services/reset-password/actions';
 import { useAppSelector, useAppDispatch  } from '../../hooks/index';
-import { RootState } from '../../services/store';
+
 
 export const ResetPasswordPage: FC = () => {
   const [isPassType, setIsPassType] = useState<boolean>(true);
@@ -17,7 +17,7 @@ export const ResetPasswordPage: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { response, passwordResetRequest }  = useAppSelector(
-    (state: RootState) => state.resetPassword,
+    (state) => state.resetPassword,
   );
   const onPassIconClick = () => {
     setIsPassType(!isPassType);
