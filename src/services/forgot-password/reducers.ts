@@ -1,6 +1,14 @@
-import { GET_PASSWORD_SUCCESS, GET_PASSWORD_REQUEST, GET_PASSWORD_FAILED, GET_PASSWORD_CLEAN, RECOVER_PASSWORD_CLEAN } from './actions';
+import { GET_PASSWORD_SUCCESS, GET_PASSWORD_REQUEST, GET_PASSWORD_FAILED, GET_PASSWORD_CLEAN, RECOVER_PASSWORD_CLEAN,  TForgotPasswordActions } from './actions';
 
-const initialState = {
+type TForgotPasswordState = {
+  isLoading: boolean,
+  success: boolean,
+  isRequestSent: boolean,
+  emailRecoverSuccess: boolean, 
+  errorText: string
+}
+
+const initialState : TForgotPasswordState = {
   isLoading: false,
   success: false,
   isRequestSent: false,
@@ -8,7 +16,7 @@ const initialState = {
   errorText: ''
 }
 
-export const recoverPasswordReducer = (state = initialState, action: any) => {
+export const recoverPasswordReducer = (state: TForgotPasswordState = initialState, action: TForgotPasswordActions): TForgotPasswordState => {
   switch (action.type) {
     case GET_PASSWORD_REQUEST: {
       return {  
@@ -20,7 +28,7 @@ export const recoverPasswordReducer = (state = initialState, action: any) => {
     case GET_PASSWORD_SUCCESS: {
       return {  
         ...state,
-        success: action.payload.success,
+        success: action.res.success,
         isLoading: false,
         emailRecoverSuccess: true
       }
@@ -36,7 +44,7 @@ export const recoverPasswordReducer = (state = initialState, action: any) => {
         ...state,
         success: false,
         isLoading: false,
-        errorText: action.payload.message
+        errorText: action.res.message
       }
     }
     case GET_PASSWORD_CLEAN: {
@@ -53,3 +61,4 @@ export const recoverPasswordReducer = (state = initialState, action: any) => {
     }
   }
 }
+

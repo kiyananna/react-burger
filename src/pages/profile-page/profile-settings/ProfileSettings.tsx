@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, FC, ChangeEvent, FormEvent, RefObject, Dispatch, SetStateAction } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from '../../../services/user/selectors';
 import { getCookie } from '../../../utils/utils';
 import { getUserInfo, refreshUserInfo } from '../../../services/user/actions';
@@ -8,11 +7,12 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ScButtonWrapper } from './ProfileSettings.styled';
+import { useAppSelector, useAppDispatch  } from '../../../hooks/index';
 
 export const ProfileSettings: FC = () => {
-  const dispatch : any = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { userName, userEmail } = useSelector(getUserData);
+  const { userName, userEmail } = useAppSelector(getUserData);
   const [isInputsDifferent, setIsInputsDifferent] = useState<boolean>(false);
   const [nameValue, setNameValue] = useState<string>(userName ? userName : '');
   const inputNameRef = useRef<HTMLInputElement>(null);
@@ -134,3 +134,4 @@ export const ProfileSettings: FC = () => {
     </div>
   );
 };
+

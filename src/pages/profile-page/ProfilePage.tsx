@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { FC } from 'react';
 import { logOut } from '../../services/logout/actions';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from "../../hooks/index";
 import { getCookie } from '../../utils/utils';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -12,7 +12,7 @@ import {
 } from './ProfilePage.styled';
 
 export const ProfilePage: FC = () => {
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
   const token = getCookie('refreshToken');
   const navigate = useNavigate();
 

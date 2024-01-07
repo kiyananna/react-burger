@@ -13,8 +13,7 @@ import {
 } from './BurgerConstructor.styled';
 import { IngredientCard } from './ingredient-card/IngredientCard';
 import { Modal } from '../modal/modal';
-import { OrderDetails } from './order-description/order-description';
-import { useSelector, useDispatch } from 'react-redux';
+import { OrderDetails } from './order-description/OrderDescription';
 import { useDrop } from 'react-dnd';
 import {
   getConstructorElement,
@@ -23,13 +22,16 @@ import {
   moveConstructorElement,
 } from '../../services/constructor-ingredients/actions';
 import { v4 as uuidv4 } from 'uuid';
-// import { getOrderRequest } from '../../services/order-detail/actions';
-// import { postOrder } from '../../utils/utils';
+import { getOrderRequest } from '../../services/order-detail/actions';
+import { postOrder } from '../../utils/utils';
 import { nanoid } from 'nanoid';
-import { TItem } from '../../utils/types'
+import { TItem, TItemState } from '../../utils/types'
 import { sendOrder } from '../../services/order-detail/actions';
 import { useNavigate } from 'react-router-dom';
 import { getUserAuth } from '../../services/user/selectors';
+import { getCookie } from '../../utils/utils';
+import { useAppSelector, useAppDispatch  } from '../../hooks/index';
+import { getUserInfo } from '../../services/user/actions';
 
 
 type ConstructorProps = {
@@ -41,16 +43,18 @@ type ConstructorProps = {
 
 export const BurgerConstructor : FC<ConstructorProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const data: any = useSelector(
-    (state: any) => state.ingredientsConstructor.constructorList,
-  );
+  const data  = useAppSelector((state) => state.ingredientsConstructor.constructorList);
   
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
   // const isUserAuth = !!useAppSelector(getUserAuth);
   const navigate = useNavigate();
-  const userAuth = useSelector((state) => getUserAuth(state));
+  const userAuth = useAppSelector((state) => getUserAuth(state));
 
-  
+  useEffect(() => {
+    if (getCookie('accessToken')) {
+      dispatch(getUserInfo(getCookie('accessToken')!));
+    }
+  }, [])
 
   const handleOpen = () => {
   
@@ -59,9 +63,22 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
     }
 
     setIsOpen(true);
-    const orderIds = data.map((item: any) => item.data._id);
-    // dispatch(getOrderRequest());
-    dispatch(sendOrder(orderIds));
+    const orderIds = data.filter((item: TItemState) => {
+      return item.data.type !== 'bun'
+    });
+  
+    const bun = data.find((item: TItemState) => item.type === 'bun')!;
+    orderIds.unshift(bun);
+    orderIds.push(bun);
+
+  
+    if (data.length === 0) return
+    const filteredOrderIds = orderIds.map((item: TItemState) => item.data._id);
+    console.log(filteredOrderIds)
+    setIsOpen(true);
+    dispatch(getOrderRequest());
+    dispatch(sendOrder(filteredOrderIds, getCookie('accessToken')!))
+  
   };
 
   const moveElement = useCallback(
@@ -73,32 +90,32 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
 
   const totalPrice = useMemo(() => {
     const sum = data
-      .map((item: any) => {
+      .map((item: TItemState) => {
         if (item.data.type === 'bun') {
           return item.data.price * 2;
         }
         return item.data.price;
       })
-      .reduce((acc: number, curr: any) => acc + curr, 0);
+      .reduce((acc: number, curr: number) => acc + curr, 0);
 
     return sum;
   }, [data]);
 
   const [{}, dropRef] = useDrop(() => ({
     accept: 'item',
-    drop: (item) => addItem(item),
+    drop: (item: TItemState) => addItem(item),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
   }));
 
-  const addItem = (element: any) => {
+  const addItem = (element: TItemState) => {
     element = { ...element, id: nanoid() };
     dispatch(getConstructorElement(element));
     dispatch(getBun(element));
   };
-  const deleteItem = (element: any) => {
+  const deleteItem = (element: TItemState) => {
     dispatch(deleteConstructorElement(element));
   };
 
@@ -114,7 +131,7 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
               <ConstructorElement type="top" text="Булка" price={0} thumbnail={''} />
             </div>
           ) : (
-            data.map((element: any, index: number) => {
+            data.map((element: TItemState, index: number) => {
               return (
                 element.type === 'bun' && (
                   <ConstructorElement
@@ -141,8 +158,8 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
             </ScIngredient>
           ) : (
             data
-              .filter((item: any) => item.type !== 'bun')
-              .map((item: any, index: number) => (
+              .filter((item: TItemState) => item.type !== 'bun')
+              .map((item, index: number) => (
                 <IngredientCard
                   index={index}
                   id={item.id}
@@ -162,7 +179,7 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
                 thumbnail={''} type="bottom" text="Булка" />
             </div>
           ) : (
-            data.map((element: any, index: number) => {
+            data.map((element: TItemState, index: number) => {
               return (
                 element.type === 'bun' && (
                   <ConstructorElement

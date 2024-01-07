@@ -1,3 +1,6 @@
-export const getUserData = (state: any) => state.user;
+import { RootState } from "../store";
 
-export const getUserAuth = (state: any) => state.user.authChecked;
+
+export const getUserData = (state: RootState) => state.user;
+
+export const getUserAuth = (state: RootState) => state.user.authChecked;

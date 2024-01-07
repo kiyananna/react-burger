@@ -1,15 +1,16 @@
 import { useState, useRef,FC, useEffect, FormEvent, ChangeEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link  } from 'react-router-dom';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { recoverPassword, cleanRecoverPassword } from '../../services/forgot-password/actions';
+import { useAppSelector, useAppDispatch  } from '../../hooks/index';
+import { RootState } from '../../services/store';
 
 
 export const ForgotPasswordPage: FC = () => {
   const [emailValue, setEmailValue] = useState('');
   const inputEmailRef = useRef<HTMLInputElement>(null);
-  const dispatch: any = useDispatch();
-  const { success, isRequestSent, isLoading, errorText }: any = useSelector((state : any) => state.recoverPassword);
+  const dispatch = useAppDispatch();
+  const { success, isRequestSent, errorText } = useAppSelector((state : RootState) => state.recoverPassword);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -48,7 +49,7 @@ export const ForgotPasswordPage: FC = () => {
           size={'default'}
           extraClass="mb-6"
         />
-        <Button disabled={isLoading} htmlType="submit" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium">
           Восстановить
         </Button>
           { errorText &&

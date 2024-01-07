@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect, FC, ChangeEvent,  FormEvent  } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { resetPassword } from '../../services/reset-password/actions';
+import { useAppSelector, useAppDispatch  } from '../../hooks/index';
+
 
 export const ResetPasswordPage: FC = () => {
   const [isPassType, setIsPassType] = useState<boolean>(true);
@@ -14,9 +15,9 @@ export const ResetPasswordPage: FC = () => {
   const [passValue, setPassValue] = useState<string>('');
   const inputPassRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const dispatch: any = useDispatch();
-  const { response, passwordResetRequest } : any = useSelector(
-    (state: any) => state.resetPassword,
+  const dispatch = useAppDispatch();
+  const { response, passwordResetRequest }  = useAppSelector(
+    (state) => state.resetPassword,
   );
   const onPassIconClick = () => {
     setIsPassType(!isPassType);

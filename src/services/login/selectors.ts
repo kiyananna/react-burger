@@ -1,1 +1,2 @@
-export const getLoginData = (state: any) => state.login.loginData?.success;
+import { RootState } from "../store";
+export const getLoginData = (state: RootState) => state.login.loginData?.success;
