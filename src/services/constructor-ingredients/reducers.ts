@@ -17,7 +17,7 @@ const initialState = {
   constructorList: [],
 };
 
-export const constructorReducer = (state: TConstructorState = initialState, action: TBurgerConstructorActions ) => {
+export const constructorReducer = (state: TConstructorState = initialState, action: TBurgerConstructorActions ) : TConstructorState => {
   switch (action.type) {
     case GET_CONSTRUCTOR_ELEMENT: {
       return {

@@ -1,4 +1,4 @@
-import { ORDER_HISTORY_CLOSE, ORDER_HISTORY_CLOSED, ORDER_HISTORY_ERROR, ORDER_HISTORY_GET_MESSAGE, ORDER_HISTORY_SUCCESS } from './actions';
+import { ORDER_HISTORY_CLOSE, ORDER_HISTORY_CLOSED, ORDER_HISTORY_ERROR, ORDER_HISTORY_GET_MESSAGE, ORDER_HISTORY_SUCCESS, TOrderHistoryActions } from './actions';
 import { TOrderFeed } from '../../utils/types';
 
 type TWSState = {
@@ -8,12 +8,12 @@ type TWSState = {
   error?: Event;
 }
 
-const initialState = {
+export const initialStateOrderHistory: TWSState = {
   wsConnected: false,
   orderHistory: null
 };
 
-export const orderHistoryReducer = (state: TWSState = initialState, action: any): TWSState => {
+export const orderHistoryReducer = (state: TWSState = initialStateOrderHistory, action: TOrderHistoryActions): TWSState => {
   switch (action.type) {
     case ORDER_HISTORY_SUCCESS:
       return {
