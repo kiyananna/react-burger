@@ -8,7 +8,7 @@ type TForgotPasswordState = {
   errorText: string
 }
 
-const initialState = {
+const initialState : TForgotPasswordState = {
   isLoading: false,
   success: false,
   isRequestSent: false,

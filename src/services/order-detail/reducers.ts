@@ -8,7 +8,7 @@ import {
   // TOrderResponse
 } from './actions';
 
-const initialState = {
+const initialState: TOrderDetailState = {
   orderID: '',
 };
 

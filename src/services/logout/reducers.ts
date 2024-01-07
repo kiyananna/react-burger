@@ -1,7 +1,7 @@
 import { deleteCookie } from '../../utils/utils';
 import { LOG_OUT_REQUEST, LOG_OUT_FAILED, LOG_OUT_SUCCESS,  TLogoutActions } from './actions';
 
-const initialState = {
+const initialState: TLogoutState = {
   logOutRequest: false,
   logOutFailed: false,
 };

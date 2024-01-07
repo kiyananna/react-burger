@@ -13,7 +13,7 @@ export type TUserState = {
   userEmail: string
 }
 
-const initialState = {
+const initialState: TUserState = {
   userRefreshRequest: false,
   userRefreshFailed: false,
   userInfoRequest: false,

@@ -1,11 +1,17 @@
 import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, IGetIngredientsRequest, IGetIngredientsSuccess} from './actions';
+import { TItem } from '../../utils/types';
 
-const defaultState = {
+type TIngredientsState = {
+  ingredients: TItem[],
+  constructorIngredients: TItem[]
+}
+
+const defaultState: TIngredientsState = {
   ingredients: [],
   constructorIngredients: [],
 };
 
-export const ingredientsReducer = (state = defaultState, action: IGetIngredientsRequest | IGetIngredientsSuccess) => {
+export const ingredientsReducer = (state: TIngredientsState = defaultState, action: IGetIngredientsRequest | IGetIngredientsSuccess): TIngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return { ...state };

@@ -7,7 +7,7 @@ import {
 } from './actions';
 import { setCookie } from '../../utils/utils';
 
-const initialState = {
+const initialState: TState = {
   loginData: undefined,
   isLoading: false,
   errorText: '',

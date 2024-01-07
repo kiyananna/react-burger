@@ -9,7 +9,7 @@ type TIngredientState = {
   ingredientDetail: TItem | null
 }
 
-const initialState = {
+const initialState: TIngredientState = {
   ingredientDetail: null,
 };
 

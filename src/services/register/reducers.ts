@@ -5,7 +5,7 @@ import {
   TRegisterActions
 } from './actions';
 
-const initialState = {
+const initialState: TRegisterState = {
   response: null,
   isLoading: false,
   errorText: '',

@@ -1,6 +1,6 @@
 import { PASSWORD_RESET_REQUEST, PASSWORD_RESET_CLEAN_STATE, PASSWORD_RESET_FAILED, PASSWORD_RESET_SUCCESS, TPasswordResetActions } from "./actions";
 
-const initialState = {
+const initialState: TResetPasswordState = {
   passwordResetRequest: false,
   passwordResetFailed: false,
   response: null

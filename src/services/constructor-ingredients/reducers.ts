@@ -13,7 +13,7 @@ type TConstructorState = {
   constructorList: TItemState[]
 }
 
-const initialState = {
+const initialState: TConstructorState  = {
   constructorList: [],
 };
 
