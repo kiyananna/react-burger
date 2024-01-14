@@ -1,14 +1,23 @@
+import { TOptions } from '../../utils/types';
+
 import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
+  TGetOrderFailedActions,
+  // TOrderResponse
 } from './actions';
 
-const initialState = {
+const initialState: TOrderDetailState = {
   orderID: '',
 };
 
-export const orderReducer = (state = initialState, action: any) => {
+export type TOrderResponse = {
+  orderID?: string,
+}
+
+
+export const orderReducer = (state:TOrderDetailState = initialState, action: TGetOrderFailedActions): TOrderDetailState => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return { ...state, orderID: '' };
@@ -19,12 +28,14 @@ export const orderReducer = (state = initialState, action: any) => {
     case GET_ORDER_FAILED: {
       return {
         ...state,
-        orderID: 'fgfg',
-        errorText: action.element,
-        isLoading: false,
+        orderID: 'fgfg'
       };
     }
     default:
       return state;
   }
 };
+
+type TOrderDetailState = {
+  orderID: string | undefined,
+}

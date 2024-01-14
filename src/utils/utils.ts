@@ -1,4 +1,7 @@
+import { TItemIngredient } from './types';
+
 export const API_URL = 'https://norma.nomoreparties.space/api/';
+
 
 
 
@@ -7,10 +10,35 @@ export const loadPost = async (url: string) => {
   return checkResponse(response);
 };
 
-export const postOrder = async (url: string, body: any) => {
+export const getIngredientImages = (ingredients: Array<TItemIngredient>, ids: Array<string>) => {
+  const urls: Array<TItemIngredient> = [];
+  ingredients.forEach(item => {
+    if (ids.includes(item._id)) {
+      urls.push(item)
+    }
+  })
+  return urls;
+}
+
+// export const fetchIngredientImages = (ingredients: Array<TElementIngredient>, ids: Array<string>) => {
+//   const imageUrls: Array<TElementIngredient> = [];
+//   ingredients.forEach(item => {
+//   if (ids.includes(item._id)) {
+//   imageUrls.push(item)
+//   }
+//   })
+//   return imageUrls;
+//   }
+
+
+export const postOrder = async (url: string, body: string[], token?: string) => {
+  console.log(body)
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
     body: JSON.stringify({
       ingredients: body,
     }),
@@ -93,7 +121,7 @@ export const fetchWithRefresh = async (url: string, options: any) => {
       (err as { message: string }).message === 'invalid token'
     ) {
       const refreshData = await refreshToken(getCookie('refreshToken'));
-      await checkResponse(refreshData).then((refreshData : any) => {
+      await checkResponse(refreshData).then((refreshData) => {
         options.headers.Authorization = refreshData.accessToken;
         setCookie('accessToken', refreshData.accessToken);
         setCookie('refreshToken', refreshData.refreshToken);
@@ -134,17 +162,24 @@ export function setCookie(name: string, value: string | null, age?: number) {
   }
 }
 
-export function getCookie(name: string | undefined) {
-  const cookies = document.cookie.split(';');
+// export function getCookie(name: string | undefined) {
+//   const cookies = document.cookie.split(';');
 
-  const cookieObjects = cookies.map((cookie) => {
-    const [cookieName, cookieValue] = cookie.trim().split('=');
-    return { name: cookieName, value: decodeURIComponent(cookieValue) };
-  });
+//   const cookieObjects = cookies.map((cookie) => {
+//     const [cookieName, cookieValue] = cookie.trim().split('=');
+//     return { name: cookieName, value: decodeURIComponent(cookieValue) };
+//   });
 
-  const matchedCookie = cookieObjects.find((cookie) => cookie.name === name);
+//   const matchedCookie = cookieObjects.find((cookie) => cookie.name === name);
 
-  return matchedCookie ? matchedCookie.value : undefined;
+//   return matchedCookie ? matchedCookie.value : undefined;
+// }
+
+export function getCookie(name: string) {
+  const matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
 export function deleteCookie(name: string) {

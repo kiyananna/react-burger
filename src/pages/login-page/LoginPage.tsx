@@ -5,14 +5,16 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../services/login/actions';
+import { useAppSelector, useAppDispatch  } from '../../hooks/index';
+
+
 
 export const LoginPage: FC  = () => {
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { loginData, errorText, isLoading } :any = useSelector(
-    (state:any) => state.login,
+  const { loginData } = useAppSelector(
+    (state) => state.login,
   );
   const [isPassType, setIsPassType] = useState(true);
   const [emailValue, setEmailValue] = useState('');
@@ -27,11 +29,11 @@ export const LoginPage: FC  = () => {
     
     dispatch(login(inputEmailRef?.current?.value, inputPassRef?.current?.value));
   };
-  const { logOutRequest } : any = useSelector((state: any ) => state.logout);
+  const { logOutRequest } = useAppSelector((state ) => state.logout);
 
   useEffect(() => {
     if (loginData && !logOutRequest) {
-      navigate('/profile');
+      navigate('/');
     }
   }, [loginData, navigate, logOutRequest]);
 

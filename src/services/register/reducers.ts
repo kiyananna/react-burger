@@ -2,15 +2,16 @@ import {
   REGISTER_REQUEST, 
   REGISTER_SUCCESS, 
   REGISTER_FAILED,
+  TRegisterActions
 } from './actions';
 
-const initialState = {
+const initialState: TRegisterState = {
   response: null,
   isLoading: false,
   errorText: '',
 }
 
-export const registerReducer = (state = initialState, action: any) => {
+export const registerReducer = (state: TRegisterState = initialState, action: TRegisterActions): TRegisterState => {
   switch (action.type) {
     case REGISTER_REQUEST: {
       return { ...state, isLoading: true, errorText: '', }
@@ -24,4 +25,11 @@ export const registerReducer = (state = initialState, action: any) => {
     default:
       return state
   }
+}
+
+
+type TRegisterState = {
+  response: {} | null,
+  isLoading: boolean,
+  errorText: string
 }

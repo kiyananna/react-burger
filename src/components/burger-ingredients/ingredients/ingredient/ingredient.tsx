@@ -13,14 +13,16 @@ import {
 import { IngredientDetail } from '../ingredient-detail/ingredient-detail';
 import { Modal } from '../../../modal/modal';
 import { useDrag } from 'react-dnd';
-import { TItem } from '../../../../utils/types';
+import { TItem, TItemState } from '../../../../utils/types';
 import {
   getIngredientDescription,
   clearIngredientDescription,
 } from '../../../../services/ingredient-detail/actions';
-import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useAppSelector, useAppDispatch  } from '../../../../hooks/index';
+
+
 
 type IProps = {
   data: TItem;
@@ -35,7 +37,7 @@ export const Ingredient: FC <IProps> = ({ data }) => {
 
   const location = useLocation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleModalOpen = () => {
     setIsOpen(true);
@@ -58,12 +60,12 @@ export const Ingredient: FC <IProps> = ({ data }) => {
     [],
   );
 
-  const constructorList: any = useSelector(
-    (state: any) => state.ingredientsConstructor.constructorList,
+  const constructorList = useAppSelector(
+    (state) => state.ingredientsConstructor.constructorList,
   );
 
   const count = useMemo(() => {
-    return constructorList.reduce((count: any, item: any) => {
+    return constructorList.reduce((count: number, item: TItemState) => {
       if (item.data._id === data._id) {
         return item.type === 'bun' ? count + 2 : count + 1;
       }
