@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+Ссылка на приложение - https://kiyananna.github.io/react-burger/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

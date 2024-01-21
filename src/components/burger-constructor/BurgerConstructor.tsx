@@ -123,7 +123,7 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
     // console.log(data);
   }, [data]);
   return (
-    <ScBurgerConstructorWrapper>
+    <ScBurgerConstructorWrapper data-test="BurgerConstructor">
       <div ref={dropRef}>
         <ScIngredientItem className="mb-4">
           {data.length === 0 ? (
@@ -208,6 +208,7 @@ export const BurgerConstructor : FC<ConstructorProps> = () => {
           htmlType="button"
           type="primary"
           size="medium"
+          data-test="SendOrder"
         >
           Оформить заказ
         </Button>

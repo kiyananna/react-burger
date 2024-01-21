@@ -1,0 +1,94 @@
+import { orderFeedReducer, initialStateOrderFeed } from './reducers';
+import {
+  ORDER_FEED_SUCCESS,
+  ORDER_FEED_ERROR,
+  ORDER_FEED_CLOSED,
+  ORDER_FEED_GET_MESSAGE,
+} from './actions';
+
+describe('Проверка лоигики работы ленты заказов', () => {
+  const orderFeedResponse = {
+    success: true,
+    orders: [
+      {
+        _id: '64db040282e277001bfa91b0',
+        ingredients: [
+          '643d69a5c3f7b9001cfa093d',
+          '643d69a5c3f7b9001cfa0943',
+          '643d69a5c3f7b9001cfa093d',
+        ],
+        status: 'done',
+        name: 'Space флюоресцентный бургер',
+        createdAt: '2023-08-15T04:50:10.930Z',
+        updatedAt: '2023-08-15T04:50:11.190Z',
+        number: 15729,
+      },
+      {
+        _id: '64db053a82e277001bfa91b3',
+        ingredients: [
+          '643d69a5c3f7b9001cfa093d',
+          '643d69a5c3f7b9001cfa0943',
+          '643d69a5c3f7b9001cfa093d',
+        ],
+        status: 'done',
+        name: 'Space флюоресцентный бургер',
+        createdAt: '2023-08-15T04:55:22.546Z',
+        updatedAt: '2023-08-15T04:55:22.755Z',
+        number: 15730,
+      },
+      {
+        _id: '64db06ac82e277001bfa91b4',
+        ingredients: [
+          '643d69a5c3f7b9001cfa093d',
+          '643d69a5c3f7b9001cfa0942',
+          '643d69a5c3f7b9001cfa093d',
+        ],
+        status: 'done',
+        name: 'Флюоресцентный spicy бургер',
+        createdAt: '2023-08-15T05:01:32.540Z',
+        updatedAt: '2023-08-15T05:01:32.739Z',
+        number: 15731,
+      },
+    ],
+    total: 15872,
+    totalToday: 114,
+  };
+
+  it('Проверка начального состояния', () => {
+    expect(orderFeedReducer(undefined, {})).toEqual(initialStateOrderFeed);
+  });
+  it('Проверка успешного соединения', () => {
+    const result = orderFeedReducer(initialStateOrderFeed, {
+      type: ORDER_FEED_SUCCESS,
+    });
+    expect(result).toEqual({
+      error: undefined,
+      wsConnected: true,
+      orderFeed: null,
+    });
+  });
+  it('Проверка ошибки соединения', () => {
+    const result = orderFeedReducer(initialStateOrderFeed, {
+      type: ORDER_FEED_ERROR,
+      payload: 'err',
+    });
+    expect(result.error).toEqual('err');
+  });
+  it('Проверка закрытия соединения', () => {
+    const result = orderFeedReducer(initialStateOrderFeed, {
+      type: ORDER_FEED_CLOSED,
+    });
+    expect(result).toEqual({
+      error: undefined,
+      wsConnected: false,
+      orderFeed: null,
+    });
+  });
+  it('Проверка на добавление', () => {
+    const result = orderFeedReducer(initialStateOrderFeed, {
+      type: ORDER_FEED_GET_MESSAGE,
+      payload: orderFeedResponse,
+    });
+    expect(result.orderFeed).toEqual(orderFeedResponse);
+  });
+});
