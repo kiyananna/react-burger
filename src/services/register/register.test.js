@@ -5,11 +5,11 @@ describe('Проверка регистрации', () => {
   const registerResponse = {
     success: true,
     user: {
-      email: 'test@test',
-      name: 'test',
+      email: 'anna@test',
+      name: 'anna',
     },
-    accessToken: 'Bearer 9516asd51dfasddfg1',
-    refreshToken: 'asda548d15a8sd14',
+    accessToken: 'Bearer fsds8989fsffss',
+    refreshToken: 'dsfs8988sffs86f',
   };
   it('Запрос регистрации', () => {
     const result = registerReducer(initialStateRegister, {

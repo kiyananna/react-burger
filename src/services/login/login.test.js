@@ -9,11 +9,11 @@ import {
 describe('Проверка запроса логина', () => {
   const loginRes = {
     success: true,
-    accessToken: 'Bearer eyJhbG',
-    refreshToken: 'c276',
+    accessToken: 'Bearer sfd87',
+    refreshToken: 'fds788',
     user: {
-      email: 'test@test.com',
-      name: 'test',
+      email: 'anna@test.com',
+      name: 'anna',
     },
   };
 
