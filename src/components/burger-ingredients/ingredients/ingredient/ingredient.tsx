@@ -80,7 +80,7 @@ export const Ingredient: FC <IProps> = ({ data }) => {
         state={{ backgroundLocation: location }}
         className="card-link"
       >
-        <Card onClick={handleModalOpen}>
+        <Card onClick={handleModalOpen} data-test={data.name}>
           {count > 0 && (
             <ScCounter>
               <Counter count={count} size="default" />
